@@ -1,0 +1,7 @@
+<?php 
+
+    $_SESSION['Admin']=null; // on détruit la/les session(s), soit si vous utilisez une autre session, utilisez de préférence le unset()
+    header('Location:index.php?uc=admin_connexion'); // On redirige
+    die();
+    
+?>

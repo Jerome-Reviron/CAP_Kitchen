@@ -1,0 +1,1267 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+
+*{
+    margin: 0;
+    padding:0;
+}
+
+/*-------------------------------------------Notfound_vue.php-----------------------------------------*/
+
+.warning{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    height: 100%;
+    overflow: hidden;
+    background-image: url('../Image/warning.jpg');
+    background-position: bottom center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Merriweather', serif;
+}
+.warning h2{
+    color: whitesmoke;
+    position: absolute;
+    bottom: 30%;
+    left: 35%;
+    font-size: 30px;
+}
+.warning p{
+    position: absolute;
+    color: white;
+    left: 35%;
+    bottom: 20%;
+    font-size: 20px;
+}
+
+/*-----------------------------------------------------------------------Connexion admin------------------------------------------------------------------------*/
+
+.co {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #eff0f4;
+}
+
+.co .administrateur{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: block;
+    padding: 60px;
+    border-radius: 39% 61% 55% 45% / 28% 31% 69% 72% ;
+    box-shadow: 15px 20px 20px rgba(0,0,0,0.07),
+    15px 25px 10px rgba(0,0,0,0.05),
+    inset 10px 10px 10px rgba(0,0,0,0.08),
+    inset -10px -10px 15px rgba(255, 255, 255, 0.651);
+    background-color: #dbecfc;
+    transition: 0.3s;
+}
+
+.co .administrateur:hover{
+    border-radius: 50%;
+}
+
+.co .administrateur::before{
+    content:'';
+    position: absolute;
+    top: 23%;
+    left: 14%;
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    opacity: 0.9;
+    border-radius: 50%;
+}
+
+.co .administrateur::after{
+    content:'';
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    opacity: 0.9;
+    border-radius: 50%;
+}
+
+.co  .administrateur .cotitleh2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #16406a;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    font-size: 2em;
+    letter-spacing: 0.1em;
+    margin-top: 15%;
+}
+
+.co .administrateur .inputBox{
+    position: relative;
+    width:75%;
+    top:40px;
+    left:10%;
+    margin: 20px 0;
+}
+
+.co .administrateur .inputBox input{
+    padding: 12px 0px 12px 40px;
+    border: none;
+    width: 92%;
+    background: #16406a;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    border-radius: 25px;
+    font-size: 1em;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.5); 
+    transition: 0.5s;
+    outline: none;
+}
+
+.co .administrateur .inputBox span {
+    position: absolute;
+    top:0;
+    left: 0;
+    font-size: 1em;
+    font-weight: 300;
+    padding: 12px 10px 12px 48px;
+    pointer-events: none;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    color: rgba(187, 187, 187, 0.8);
+}
+
+.co .administrateur .inputBox input:valid ~ span,
+.co .administrateur .inputBox input:focus ~ span{
+    color: #9D8A57;
+    border: 2px solid #9D8A57;
+    background: #16406a;
+    transform: translateX(25px ) translateY(-9px);
+    font-size:0.9em;
+    padding: 0 8px;
+    border-radius: 10px;
+    letter-spacing: 0.1em;
+}
+
+.co .administrateur .inputBox input:valid,
+.co .administrateur .inputBox input:focus{
+    border: 2px solid #9D8A57;
+}
+
+.co .administrateur .inputBox i{
+    position:absolute;
+    top: 15px;
+    left: 16px;
+    width: 25px;
+    color: #9D8A57;
+    border-right: 1px solid #9D8A57;
+}
+
+.co .administrateur input[type="submit"]{
+    width: 200px;
+    margin-left: 20%;
+    padding: 12px 15px;
+    background:#9D8A57;
+    color: #16406a;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.co .administrateur input[type="submit"]:hover{
+    color: #9D8A57;
+    background: #16406a;
+}
+
+
+/* -------------------------------------------------------------------------------Accueil---------------------------------------------------------------------------- */
+
+:root {
+    /*-----------------Colors---------------*/
+    --body-color: #dbecfc;
+    --sidebar-color: #FFF;
+    --primary-color: #16406a;
+    --primary-color-light: #F6F5FF;
+    --toogle-color: #DDD;
+    --text-color: #707070;
+
+    /*--------------Transitions-------------*/
+    --trans-02: all 0.2s ease;
+    --trans-03: all 0.3s ease;
+    --trans-04: all 0.4s ease;
+    --trans-05: all 0.5s ease;
+}
+
+section {
+    height: 100vh;
+    background: var(--body-color);
+    transition: var(--trans-02);
+}
+
+section.dark {
+    /*-----------------Colors---------------*/
+    --body-color: #18191A;
+    --sidebar-color: #242526;
+    --primary-color: #9D8A57;
+    --primary-color-light: #3A3B3C;
+    --toogle-color: #FFF;
+    --text-color: #CCC;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px;
+    padding: 10px;
+    border-radius: 6px;
+    background: var(--sidebar-color);
+    z-index: 100;
+}
+
+.sidebar.close{
+    width: 70px;
+}
+
+.sidebar header {
+    position: relative;
+}
+
+.sidebar .image-text {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .image-text i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background: var(--primary-color);
+    color: var(--body-color);
+    margin: 0 10px;
+}
+
+section.dark .sidebar .image-text i{
+    color: var(--toogle-color);
+}
+
+.sidebar.close .image-text i{
+    padding: 0 7.5px;
+}
+
+.sidebar .image-text .name {
+    font-size: 20px;
+    font-family: 'Merriweather', serif;
+    color: var(--text-color);
+}
+
+section.dark .sidebar .image-text .name {
+    color:var(--toogle-color)
+;}
+.sidebar.close .image-text .name {
+    opacity: 0;
+}
+
+.sidebar header .toggle {
+    position: absolute;
+    top: 50%;
+    right: -22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    font-size: 22px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--sidebar-color);
+    transform: translateY(-50%) rotate(180deg);
+    transition:var(--trans-04);
+    padding-bottom: 1px;
+}
+
+section.dark .sidebar header .toggle {
+    color: var(--toogle-color);
+}
+
+.sidebar.close header .toggle {
+    transform: translateY(-50%);
+}
+
+.sidebar .menu-bar .menu .menu-links li.nav-link,
+.sidebar .menu-bar .bottom-content  li.nav-link,
+.sidebar .menu-bar .bottom-content .mode {
+    height: 50px;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.sidebar .menu-bar .menu .menu-links li.nav-link a,
+.sidebar .menu-bar .bottom-content  li.nav-link a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: var(--trans-04);
+}
+
+.sidebar .menu-bar .menu .menu-links li.nav-link a:hover,
+.sidebar .menu-bar .bottom-content  li.nav-link a:hover,
+.sidebar .menu-bar .bottom-content .mode:hover {
+    background: var(--primary-color);
+}
+
+.sidebar .menu-bar .menu .menu-links li.nav-link a .icon, 
+.sidebar .menu-bar .menu .menu-links li.nav-link a .link-name,
+.sidebar .menu-bar .bottom-content  li.nav-link a .icon, 
+.sidebar .menu-bar .bottom-content  li.nav-link a .link-name,
+.sidebar .menu-bar .bottom-content .mode .moon-sun .icon,
+.sidebar .menu-bar .bottom-content .mode .mode-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    font-size: 20px;
+    color: var(--text-color);
+    transition: var(--trans-03)
+}
+
+.sidebar.close .menu-bar .menu .menu-links li.nav-link a .link-name, 
+.sidebar.close .menu-bar .bottom-content  li.nav-link a .link-name,
+.sidebar.close .menu-bar .bottom-content .mode .mode-name {
+    opacity: 0;
+}
+
+.sidebar .menu-bar .menu .menu-links li.nav-link a:hover .icon, 
+.sidebar .menu-bar .menu .menu-links li.nav-link a:hover .link-name,
+.sidebar .menu-bar .bottom-content li.nav-link a:hover .icon, 
+.sidebar .menu-bar .bottom-content li.nav-link a:hover .link-name,
+.sidebar .menu-bar .bottom-content .mode:hover .moon-sun .icon,
+.sidebar .menu-bar .bottom-content .mode:hover .mode-name {
+    color:var(--body-color);
+}
+
+.sidebar .menu-bar {
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar .menu-bar .bottom-content .mode {
+    position: relative;
+    border-radius: 6px;
+    background: var(--body-color);
+}
+
+.sidebar .menu-bar .bottom-content .mode .moon-sun{
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .menu-bar .bottom-content .mode .moon-sun i {
+    position: absolute;
+}
+
+.sidebar .menu-bar .bottom-content .mode .moon-sun i.sun{
+    opacity: 0;
+}
+
+section.dark .sidebar .menu-bar .bottom-content .mode .moon-sun i.sun{
+    opacity: 1;
+}
+
+section.dark .sidebar .menu-bar .bottom-content .mode .moon-sun i.moon{
+    opacity: 0;
+}
+
+.sidebar .menu-bar .bottom-content .mode .toggle-switch {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 12px;
+    height: 100%;
+    min-height: 60px;
+}
+
+.sidebar .menu-bar .bottom-content .mode .toggle-switch .switch {
+    position: relative;
+    height: 22px;
+    width: 44px;
+    border-radius: 25px;
+    background: var(--toogle-color);
+    margin-left: 10px;
+    border: 1px solid var(--text-color);
+}
+
+.sidebar .menu-bar .bottom-content .mode .toggle-switch .switch::before {
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    background: var(--sidebar-color);
+    border: 1px solid var(--text-color);
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: var(--trans-03);
+}
+
+section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
+    left: 20px;
+}
+
+/*------------------------------------Section Dashboard---------------------------*/
+.home{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(11, 1fr);
+    gap: 8px;
+    left: 220px;
+    height: 100vh;
+    width: calc(100% - 220px);
+    background: var(--body-color);
+    transition: var(--trans-03);
+}
+
+.sidebar.close ~ .home {
+    left: 70px;
+    width: calc(100% - 70px);
+}
+
+.home .nav1 {
+    grid-area: 1 / 1 / 2 / 9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--sidebar-color);
+    margin: 5px 5px 5px 35px;
+    border-radius: 6px;
+}
+
+.home .nav1 h2{
+    font-family: 'Merriweather', serif;
+    font-size: 20px;
+    color: var(--text-color);
+    margin-left: 20px;
+}
+
+.home .nav1 p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Merriweather', serif;
+    font-size: 20px;
+    color: var(--text-color);
+}
+
+.home .nav1 p img{
+    width: 20px;
+    padding: 10px;
+    margin: 0 20px;
+    border-radius: 6px;
+    background: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.home .start2 { 
+    grid-area: 2 / 1 / 11 / 3; 
+    background: var(--sidebar-color);
+    margin: 5px 5px 5px 35px;
+    border-radius: 6px;
+}
+
+.home .start2 h3{
+    font-family: 'Merriweather', serif;
+    font-size: 20px;
+    color: var(--text-color);
+    margin: 20px;
+}
+
+.home .start2 .menu-links li.nav-link{
+    height: 50px;
+    margin: 10px 20px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.home .start2 .menu-links li.nav-link a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: var(--trans-04);
+    border: 2px solid var(--primary-color);
+}
+
+.home .start2 .menu-links li.nav-link a:hover {
+    background: var(--primary-color);
+}
+
+.home .start2 .menu-links li.nav-link a .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    font-size: 25px;
+    color: var(--primary-color);
+    transition: var(--trans-03)
+}
+
+.home .start2 .menu-links li.nav-link a .link-content .link-name, 
+.home .start2 .menu-links li.nav-link a .link-content p {
+    display: flex;
+    align-items: center;
+    transition: var(--trans-03)
+}
+
+.home .start2 .menu-links li.nav-link a .link-content .link-name {
+    font-size: 20px;
+    color: var(--primary-color);
+}
+
+.home .start2 .menu-links li.nav-link a .link-content p {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.home .start2 .menu-links li.nav-link a:hover .icon, 
+.home .start2 .menu-links li.nav-link a:hover .link-content .link-name,
+.home .start2 .menu-links li.nav-link a:hover .link-content p {
+    color:var(--body-color);
+}
+
+.home .indicateur3 { 
+    grid-area: 2 / 3 / 6 / 9; 
+    background: orangered;
+}
+.home .entree4 { 
+    grid-area: 6 / 3 / 11 / 5; 
+    background: green;
+}
+.home .plat5 { 
+    grid-area: 6 / 5 / 11 / 7; 
+    background: blue;
+}
+.home .dessert6 { 
+    grid-area: 6 / 7 / 11 / 9; 
+    background: blueviolet;
+}
+.home .finish7 { 
+    grid-area: 11 / 1 / 12 / 9; 
+    background: black;
+}
+
+/*------------------------------------------------------------------------------Inscription_vue.php--------------------------------------------------------------------------*/
+
+.Panel_boss_inscription{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1A2D40;
+}
+
+.Panel_boss_inscription .Administrateur {
+    padding: 40px;
+    border-radius: 20px;
+    border: 8px solid #1A2D40;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.Panel_boss_inscription .Administrateur .form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    width:650px;
+}
+
+.Panel_boss_inscription .Administrateur .form .admintitleh2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    font-size: 2em;
+    letter-spacing: 0.1em;
+    margin: 0 100px;
+}
+
+.Panel_boss_inscription .Administrateur .form .inputBox {
+    position: relative;
+    width: 300px;
+}
+
+.Panel_boss_inscription .Administrateur .form .inputBox input, select {
+    padding: 12px 0px 12px 40px;
+    border: none;
+    width: 85%;
+    background: #1A2D40;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    border-radius: 25px;
+    font-size: 1em;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35); 
+    transition: 0.5s;
+    outline: none;
+}
+
+.Panel_boss_inscription .Administrateur .form .inputBox span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1em;
+    font-weight: 300;
+    padding: 12px 10px 12px 48px;
+    pointer-events: none;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: rgba(187, 187, 187, 0.8);
+}
+
+.Panel_boss_inscription .Administrateur .form .inputBox .Id_E{
+    display: none;
+}
+
+.Panel_boss_inscription .Administrateur .form .inputBox input:valid ~ span,
+.Panel_boss_inscription .Administrateur .form .inputBox input:focus ~ span,
+.Panel_boss_inscription .Administrateur .form .inputBox input:valid ~ .Id_E,
+.Panel_boss_inscription .Administrateur .form .inputBox input:focus ~ .Id_E,
+.Panel_boss_inscription .Administrateur .form .inputBox select:valid ~ span,
+.Panel_boss_inscription .Administrateur .form .inputBox select:focus ~ span{
+    display:block;
+    color: #9D8A57;
+    border: 1px solid #9D8A57;
+    background: #1A2D40;
+    transform: translateX(25px ) translateY(-9px);
+    font-size:0.9em;
+    padding: 0 8px;
+    border-radius: 10px;
+    letter-spacing: 0.1em;
+}
+
+.Panel_boss_inscription .Administrateur .form .inputBox input:valid,
+.Panel_boss_inscription .Administrateur .form .inputBox input:focus,
+.Panel_boss_inscription .Administrateur .form .inputBox select:valid,
+.Panel_boss_inscription .Administrateur .form .inputBox select:focus{
+    border: 1px solid #9D8A57;
+}
+
+.Panel_boss_inscription .Administrateur .form .inputBox i{
+    position:absolute;
+    top: 15px;
+    left: 16px;
+    width: 25px;
+    color: #9D8A57;
+    border-right: 1px solid #9D8A57;
+}
+
+.Panel_boss_inscription .Administrateur .form .inputBox input[type="submit"]{
+    width: 100%;
+    background:#9D8A57;
+    color: #1A2D40;
+    padding: 10px 0;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.Panel_boss_inscription .Administrateur .form table thead {
+    position: relative;
+    width: 100%;
+}
+
+.Panel_boss_inscription .Administrateur .form table thead tr th {
+    background:#9D8A57;
+    color: #1A2D40;
+    padding: 12px 10px;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.Panel_boss_inscription .Administrateur .form table tbody tr td{
+    position: relative;
+    left: 0px;
+    padding: 12px 10px;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: rgba(187, 187, 187, 0.8);
+}
+
+.Panel_boss_inscription .Administrateur .form table tbody tr td a img{
+    position: relative;
+    left: 25%;
+    width: 40px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.Panel_boss_inscription .Administrateur .form a.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: #9D8A57;
+    padding: 10px 20px;
+    margin: 0px 120px;
+    text-decoration: none;
+    border: 1px solid #9D8A57;
+    border-radius: 10px;
+}
+.Panel_boss_inscription .box .inputBox #toggleBtn{
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 50%;
+    cursor: pointer;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Panel_boss_inscription .box.inputBox #toggleBtn::before{
+    content: '\f070';
+    font-family: fontAwesome;
+}
+
+.Panel_boss_inscription .validation{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.Panel_boss_inscription .validation {
+    display: none;
+}
+.Panel_boss_inscription .validation.active {
+    display: block;
+}
+
+.Panel_boss_inscription .validation ul li{
+    position: relative;
+    list-style: none;
+    color: #fff;
+    font-size: 0.85em;
+    transition: 0.5s;
+}
+
+.Panel_boss_inscription .validation ul li.valid{
+    color: rgba(255,255,255,0.5);
+}
+
+.Panel_boss_inscription .validation ul li::before{
+    content: '\f192';
+    width: 20px;
+    height: 10px;
+    font-family: fontAwesome;
+    display: inline-flex;
+}
+
+.Panel_boss_inscription .validation ul li.valid::before{
+    content: '\f00c';
+    color: "0f0";
+}
+
+.Panel_boss_inscription .box{
+    position: relative;
+    width: 300px;
+}
+
+.Panel_boss_inscription .box .inputBox{
+    position: relative;
+    width: 100%;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 15 25px rgba(0,0,0,0.15);
+}
+
+.Panel_boss_inscription .box .inputBox input{
+    position: relative;
+    width: 90%;
+    outline: none;
+    border: none;
+    padding: 10px 5px;
+}
+
+.Panel_boss_inscription .box .inputBox #toggleBtn{
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 50%;
+    cursor: pointer;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Panel_boss_inscription .box .inputBox #toggleBtn::before{
+    content: '\f070';
+    font-family: fontAwesome;
+}
+
+.Panel_boss_inscription .box .inputBox #toggleBtn.hide::before{
+    content: '\f06e';
+    font-family: fontAwesome;
+}
+
+.Panel_boss_inscription .validation{
+    position: absolute;
+    top:35%;
+    left:5%;
+    background: #1a2d40;
+    padding: 10px;
+    margin: 30px;
+    border-radius: 6px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+.Panel_boss_inscription .validation ul{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Panel_boss_inscription .validation ul li{
+    position: relative;
+    list-style: none;
+    color: #9d8a57;
+    font-size: 0.85em;
+    transition: 0.5s;
+}
+
+.Panel_boss_inscription .validation ul li.valid{
+    color: rgba(187,187,187);
+}
+
+.Panel_boss_inscription .validation ul li::before{
+    content: '\f192';
+    width: 20px;
+    height: 10px;
+    font-family: fontAwesome;
+    display: inline-flex;
+}
+
+.Panel_boss_inscription .validation ul li.valid::before{
+    content: '\f00c';
+    color: #0f0;
+}
+
+
+/*----------------------------------------------Listing Admin--------------------------------------------------*/
+
+.liste_admin {
+    position:relative;
+    top:0;
+    left:0;
+    background: #1A2D40;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+.liste_admin .form {
+    padding: 40px;
+    border-radius: 20px;
+    border: 8px solid #1A2D40;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    }
+
+.liste_admin .adminh2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; 
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    font-size: 2em;
+    letter-spacing: 0.1em;
+    margin-bottom: 40px;
+}
+
+.liste_admin table {
+    position: relative;
+    top:25%;
+    left:0;
+    display: block;
+    overflow: auto;
+    max-height: 500px;
+    width: 100%;
+    padding: 10px;
+}
+.liste_admin table::-webkit-scrollbar {
+    width: 0.6em;
+    background-color: inherit;
+}
+
+.liste_admin table::-webkit-scrollbar-thumb {
+background-color: inherit;
+}
+
+.liste_admin table::-webkit-scrollbar-thumb:hover {
+background-color: #9D8A57;
+}
+
+.liste_admin th{
+    background:#9D8A57;
+    color: #1A2D40;
+    padding: 5px;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-box-shadow: -2px -2px 5px rgba(187, 187, 187, 0.1), 2px 2px 5px rgba(0, 0, 0, 0.5), 
+        inset -2px -2px 5px rgba(187, 187, 187, 0.1), inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: -2px -2px 5px rgba(187, 187, 187, 0.1), 2px 2px 5px rgba(0, 0, 0, 0.5), 
+        inset -2px -2px 5px rgba(187, 187, 187, 0.1), inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+.liste_admin td{
+    position: relative;
+    left: 0px;
+    padding: 12px 10px;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: rgba(187, 187, 187, 0.8);
+    max-width: 125px;
+    overflow: hidden;
+}
+.liste_admin .bossu{
+    position: relative;
+    left: 0px;
+    padding: 12px 10px;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: rgba(187, 187, 187, 0.8);
+    max-width: 55px;
+    overflow: hidden;
+}
+.liste_admin table tbody tr td a img{
+    width: 40px;
+    padding: 5px 5px 5px 15px;
+    cursor: pointer;
+}
+
+.liste_admin p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.liste_admin p a.top-rectangle-button{
+    cursor: pointer;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: #9D8A57;
+    padding: 10px 20px;
+    margin: 40px 8px 0 ;
+    text-decoration: none;
+    border: 1px solid #9D8A57;
+    border-radius: 10px;
+}
+
+/*-----------------------------------------------------------------------Admin créer, modifier-------------------------------------------------------------------*/
+
+.Panel_TVA{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1A2D40;
+}
+
+.Panel_TVA #rotate-device {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5em;
+    z-index: 9999;
+}
+
+.Panel_TVA .Administrateur {
+    padding: 40px;
+    border-radius: 20px;
+    border: 8px solid #1A2D40;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+}  
+
+.Panel_TVA .Administrateur .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+} 
+
+.Panel_TVA .Administrateur .form .admintitleh2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    font-size: 2em;
+    letter-spacing: 0.1em;
+}
+
+.Panel_TVA .Administrateur .form .inputBox {
+    position: relative;
+    width: 300px;
+}
+
+.Panel_TVA .Administrateur .form .inputBox input {
+    padding: 12px 0px 12px 40px;
+    border: none;
+    width: 92%;
+    background: #1A2D40;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    border-radius: 25px;
+    font-size: 1em;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35); 
+    transition: 0.5s;
+    outline: none;
+}
+
+.Panel_TVA .Administrateur .form .inputBox span {
+    position: absolute;
+    top:0;
+    left: 0;
+    font-size: 1em;
+    font-weight: 300;
+    padding: 12px 10px 12px 48px;
+    pointer-events: none;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: rgba(187, 187, 187, 0.8);
+}
+
+.Panel_TVA .Administrateur .form .inputBox input:valid ~ span,
+.Panel_TVA .Administrateur .form .inputBox input:focus ~ span{
+    color: #9D8A57;
+    border: 1px solid #9D8A57;
+    background: #1A2D40;
+    transform: translateX(25px ) translateY(-9px);
+    font-size:0.9em;
+    padding: 0 8px;
+    border-radius: 10px;
+    letter-spacing: 0.1em;
+}
+
+.Panel_TVA .Administrateur .form .inputBox input:valid,
+.Panel_TVA .Administrateur .form .inputBox input:focus{
+    border: 1px solid #9D8A57;
+}
+
+.Panel_TVA .Administrateur .form .inputBox input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper {
+    display: none;
+}
+
+.Panel_TVA .Administrateur .form .inputBox i{
+    position:absolute;
+    top: 15px;
+    left: 16px;
+    width: 25px;
+    padding: 2px 0;
+    color: #9D8A57;
+    border-right: 1px solid #9D8A57;
+}
+
+.Panel_TVA .Administrateur .form .inputBox input[type="submit"]{
+    width: 100%;
+    padding: 12px 10px;
+    background:#9D8A57;
+    color: #1A2D40;
+    padding: 10px 0;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+} 
+
+.Panel_TVA .Administrateur .form table thead {
+    position: relative;
+    width: 100%;
+}
+
+.Panel_TVA .Administrateur .form table thead tr th {
+    background:#9D8A57;
+    color: #1A2D40;
+    padding: 12px 10px;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
+        inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.Panel_TVA .Administrateur .form table tbody tr td{
+    position: relative;
+    left: 0px;
+    padding: 12px 10px;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: rgba(187, 187, 187, 0.8);
+}
+
+.Panel_TVA .Administrateur .form table tbody tr td a img{
+    position: relative;
+    left: 25%;
+    width: 40px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.Panel_TVA .Administrateur .form a.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: #9D8A57;
+    padding: 10px 20px;
+    margin: 8px 4px;
+    text-decoration: none;
+    border: 1px solid #9D8A57;
+    border-radius: 10px;
+}
+
+.Panel_TVA .Administrateur .form p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Panel_TVA .Administrateur .form p a.login{
+    cursor: pointer;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+    color: #9D8A57;
+    padding: 10px 20px;
+    margin: 8px 4px;
+    text-decoration: none;
+    border: 1px solid #9D8A57;
+    border-radius: 10px;
+}
+
+
