@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /CAP_Kitchen/
+
+RewriteRule ^$ index.php?uc=admin_connexion [L]
