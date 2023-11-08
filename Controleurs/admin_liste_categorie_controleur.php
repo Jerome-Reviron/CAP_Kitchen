@@ -15,6 +15,7 @@ if (isset($_SESSION['Admin'])) {
                                                 <tr>
                                                         <th class="sortable">Id Catégorie</th>
                                                         <th class="sortable">Nom</th>
+                                                        <th class="sortable">Genre</th>
                                                         <th>Modifier</th>
                                                         <th>Supprimer</th>
                                                 </tr>

@@ -14,15 +14,16 @@ if (isset($_SESSION['Admin'])) {
             $Categorie = Categorie::getInfoCategorie($Id);
 
             // Validation des données
-            if (!empty($_POST['Nom_Categorie'])) {
+            if (!empty($_POST['Nom_Categorie']) && !empty($_POST['Genre'])) {
 
                 $Securiter->verifyCsrfToken($_POST['csrf_token']);
                 
                 // Patch XSS
                 $Nom_Categorie = htmlspecialchars($_POST['Nom_Categorie']);
+                $Genre = htmlspecialchars($_POST['Genre']);
 
                 // Mise à jour des données dans la base de données
-                $Categorie->postInfoCategorie($Id, $Nom_Categorie);
+                $Categorie->postInfoCategorie($Id, $Nom_Categorie, $Genre);
 
                 // Redirection vers une autre page
                 header("Location: index.php?uc=admin_modifier_categorie");

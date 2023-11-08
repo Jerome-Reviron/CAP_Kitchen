@@ -2,18 +2,23 @@
 class Categorie{
     private $Id_Categorie;
     private $Nom_Categorie;
+    private $Genre;
 
-        public function __construct($Id_Categorie,$Nom_Categorie){
+
+        public function __construct($Id_Categorie,$Nom_Categorie, $Genre){
             $this->Id_Categorie=$Id_Categorie;
             $this->Nom_Categorie=$Nom_Categorie;
+            $this->Genre=$Genre;
+
         }
 
     //----------------------------------------------- Creer -----------------------------------------------
 
     public function createCategorie() {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare('INSERT INTO Categorie (Nom_Categorie) VALUES (:Nom_Categorie)');
+        $stmt = $bdd->prepare('INSERT INTO Categorie (Nom_Categorie, Genre) VALUES (:Nom_Categorie, :Genre)');
         $stmt->bindParam(':Nom_Categorie', $this->Nom_Categorie, PDO::PARAM_STR);
+        $stmt->bindParam(':Genre', $this->Genre, PDO::PARAM_STR);
         $stmt->execute();
     }
     //----------------------------------------------- Vérifier -----------------------------------------------
@@ -41,7 +46,7 @@ class Categorie{
         $data = $stmt->fetch();
     
         // Instancier un objet Categorie avec les données récupérées
-        $Categorie = new Categorie($data['Id_Categorie'], $data['Nom_Categorie']);
+        $Categorie = new Categorie($data['Id_Categorie'], $data['Nom_Categorie'], $data['Genre']);
         return $Categorie;
     }
     
@@ -49,13 +54,14 @@ class Categorie{
 
     //----------------------------------------------- Modifier -----------------------------------------------
     
-    public function postInfoCategorie($Id, $Nom_Categorie) {
+    public function postInfoCategorie($Id, $Nom_Categorie, $Genre) {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $update = $bdd->prepare("UPDATE Categorie SET Nom_Categorie = :Nom_Categorie WHERE Id_Categorie = :Id");
+        $update = $bdd->prepare("UPDATE Categorie SET Nom_Categorie = :Nom_Categorie, Genre = :Genre WHERE Id_Categorie = :Id");
     
         // Utilisation de bindParam pour lier les valeurs des variables aux paramètres de la requête préparée
         $update->bindParam(':Id', $Id, PDO::PARAM_INT);
         $update->bindParam(':Nom_Categorie', $Nom_Categorie, PDO::PARAM_STR);
+        $update->bindParam(':Genre', $Genre, PDO::PARAM_STR);
     
         $update->execute();
     }
@@ -69,7 +75,7 @@ class Categorie{
         $data = $stmt->fetchAll();
         $Categories = array();
         foreach ($data as $CategorieData) {
-            $Categorie = new Categorie($CategorieData['Id_Categorie'], $CategorieData['Nom_Categorie']);
+            $Categorie = new Categorie($CategorieData['Id_Categorie'], $CategorieData['Nom_Categorie'], $CategorieData['Genre']);
             array_push($Categories, $Categorie);
         }
         return $Categories;
@@ -133,6 +139,27 @@ class Categorie{
 
         return $this;
     }
+
+        /**
+     * Get the value of Genre
+     */ 
+    public function getGenre()
+    {
+        return $this->Genre;
+    }
+
+    /**
+     * Set the value of Genre
+     *
+     * @return  self
+     */ 
+    public function setGenre($Genre)
+    {
+        $this->Genre = $Genre;
+
+        return $this;
+    }
+
 
 }
 ?>

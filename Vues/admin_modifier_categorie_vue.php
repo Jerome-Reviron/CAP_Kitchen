@@ -8,6 +8,14 @@
                 <span>Nom</span>
             </div>
             <div class="inputBox">
+                <select style="width: 300px" name="Genre" required="required">
+                    <option value="Ingrédient">Ingrédient</option>
+                    <option value="Recette">Recette</option>
+                </select>       
+                <i class="fa-solid fa-check"></i>        
+                <span>Genre</span>
+            </div>
+            <div class="inputBox">
                 <input type="submit" value="Modifier">
             </div>
             <a class="login" href="./index.php?uc=admin_liste_categorie">Retour</a>
