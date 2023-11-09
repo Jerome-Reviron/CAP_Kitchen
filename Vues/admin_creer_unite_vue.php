@@ -4,12 +4,12 @@
             <h2 class="admintitleh2">Créer une Unité</h2>
             <div class="inputBox">
                 <input type="text" name="Nom_Unite" required="required" autocomplete="off">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-hashtag"></i>
                 <span>Nom</span>
             </div>
             <div class="inputBox">
                 <input type="text" name="Chiffre" required="required" autocomplete="off">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-plus-minus"></i>
                 <span>Chiffre</span>
             </div>
             <div class="inputBox">
@@ -24,7 +24,7 @@
                     }
                     ?>
                 </select>
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-sliders"></i>
                 <span>Valeur</span>
             </div>
             <div class="inputBox">

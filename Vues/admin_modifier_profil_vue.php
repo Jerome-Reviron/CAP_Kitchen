@@ -1,7 +1,12 @@
 <div class="Panel_boss_inscription">
+    <div class="container_geomotif"></div>
+    <div class="container_btn">
+        <button onclick="generer();" >Générer</button>
+        <button onclick="circle();" class="circleBtn">Changer</button>
+    </div>
     <div class="Administrateur">
         <form class="form" action="index.php?uc=admin_modifier_admin&Id=<?php echo ($Admin->getId_Admin()); ?>" method="POST">
-            <h2 class="admintitleh2">Modifier un Admin</h2>
+            <h2 class="admintitleh2">Mon Profil</h2>
             <div class="inputBox">
                 <input type="text" name="Nom" value="<?php echo ($Admin->getNom()); ?>" required="required" autocomplete="off">
                 <i class="fa-solid fa-user"></i>

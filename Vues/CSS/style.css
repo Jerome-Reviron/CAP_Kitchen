@@ -598,13 +598,83 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background: #202020;
+}
+
+.Panel_boss_inscription .container_geomotif {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Panel_boss_inscription .container_geomotif .block {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #444;
+    border: 1.2px solid #444;
+    border-radius: 6px;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.Panel_boss_inscription .container_geomotif.circle .block {
+    border-radius: 50%;
+}
+
+.Panel_boss_inscription .container_geomotif .block:nth-child(3n + 1) {
+    background: #444;
+}
+
+.Panel_boss_inscription .container_geomotif .block:nth-child(3n + 2) {
+    background: #fff;
+}
+
+.Panel_boss_inscription .container_geomotif .block:nth-child(3n + 3) {
     background: #1A2D40;
+}
+
+.Panel_boss_inscription .container_geomotif .block:nth-child(3n + 4) {
+    background: #9D8A57;
+}
+
+.Panel_boss_inscription .container_btn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 92%;
+    width: 300px;;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.Panel_boss_inscription .container_btn button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'EB+Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1em;
+    letter-spacing: 0.05em;
+    background: #1A2D40;
+    color: #9D8A57;
+    padding: 10px 20px;
+    margin: 0px 10px;
+    border: 1px solid #9D8A57;
+    border-radius: 10px;
 }
 
 .Panel_boss_inscription .Administrateur {
     padding: 40px;
     border-radius: 20px;
-    border: 8px solid #1A2D40;
+    background: #1A2D40;
+    z-index: 1;
+    border: 8px solid #444;
     -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
         inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
     box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
@@ -618,6 +688,7 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     align-items: center;
     gap: 16px;
     width:650px;
+    z-index: 1;
 }
 
 .Panel_boss_inscription .Administrateur .form .admintitleh2 {
@@ -629,12 +700,13 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     font-weight: 500;
     font-size: 2em;
     letter-spacing: 0.1em;
-    margin: 0 100px;
+    margin: 0 100px 20px 100px;
 }
 
 .Panel_boss_inscription .Administrateur .form .inputBox {
     position: relative;
     width: 300px;
+    margin: 5px 0;
 }
 
 .Panel_boss_inscription .Administrateur .form .inputBox input, select {
@@ -653,6 +725,11 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     transition: 0.5s;
     outline: none;
 }
+
+.Panel_boss_inscription .Administrateur .form .inputBox  select {
+    width: 300px;
+}
+
 
 .Panel_boss_inscription .Administrateur .form .inputBox span {
     position: absolute;
@@ -713,7 +790,6 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     color: #1A2D40;
     padding: 10px 0;
     font-family: 'Merriweather', serif;
-    font-weight: 500;
     cursor: pointer;
     -webkit-box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
         inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);

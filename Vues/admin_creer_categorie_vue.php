@@ -4,7 +4,7 @@
             <h2 class="admintitleh2">Créer une Catégorie</h2>
             <div class="inputBox">
                 <input type="text" name="Nom_Categorie" required="required" autocomplete="off">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-hashtag"></i>
                 <span>Nom</span>
             </div>
             <div class="inputBox">
@@ -12,7 +12,7 @@
                     <option value="Ingrédient">Ingrédient</option>
                     <option value="Recette">Recette</option>
                 </select>       
-                <i class="fa-solid fa-check"></i>        
+                <i class="fa-solid fa-tags"></i>      
                 <span>Genre</span>
             </div>
             <div class="inputBox">

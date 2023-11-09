@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="./index.php?uc=admin_liste_Fournisseurs">
+                        <a href="./index.php?uc=admin_liste_Fournisseur">
                             <i class='bx bxs-truck icon'></i>
                             <span class="link-name">Fournisseurs</span>
                         </a>
@@ -112,7 +112,7 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="./index.php?uc=admin_liste_unite">
+                    <a href="./index.php?uc=admin_creer_unite">
                         <i class="fa-solid fa-2 icon"></i>
                         <div class="link-content">
                             <span class="link-name">Je crée mes unités</span>
@@ -121,7 +121,7 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="./index.php?uc=admin_liste_categorie">
+                    <a href="./index.php?uc=admin_creer_categorie">
                         <i class="fa-solid fa-3 icon"></i>
                         <div class="link-content">
                             <span class="link-name">Je crée mes catégories</span>

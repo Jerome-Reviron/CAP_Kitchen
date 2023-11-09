@@ -96,4 +96,6 @@ if (isset($_SESSION['Admin'])) {
 }
 ?>
 <script type="text/javascript" src="./Vues/JS/admin_modif.js"></script>
+<script type="text/javascript" src="./Vues/JS/geomotif.js"></script>
+
 
