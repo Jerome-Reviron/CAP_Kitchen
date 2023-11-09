@@ -21,8 +21,7 @@
     include './Modeles/Ingredient.php'; 
     include './Modeles/Unite.php'; 
     include './Modeles/Categorie.php'; 
-
-
+    include './Modeles/Fournisseur.php'; 
 
     if(!isset($_SESSION)){
         session_start();
