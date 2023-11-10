@@ -710,7 +710,7 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
 }
 
 .Panel_boss_inscription .Administrateur .form .inputBox input, select {
-    padding: 12px 0px 12px 40px;
+    padding: 13px 0px 12px 45px;
     border: none;
     width: 85%;
     background: #1A2D40;

@@ -4,7 +4,7 @@
             <h2 class="admintitleh2">Modifier Fournisseur</h2>
             <div class="inputBox">
                 <input type="text" name="Forme_Juridique" value="<?php echo ($Fournisseur->getForme_Juridique()); ?>" required="required" autocomplete="off">
-                <i class="fa-regular fa-user"></i>
+                <i class="fa-solid fa-user-gear"></i>
                 <span>Forme Juridique</span>
             </div>
             <div class="inputBox">

@@ -11,7 +11,7 @@
                     <option value="SAS">SAS</option>
                     <option value="SASU">SASU</option>
                 </select>
-                <i class="fa-regular fa-user"></i>
+                <i class="fa-solid fa-user-gear"></i>
                 <span>Forme Juridique</span>
             </div>
             <div class="inputBox">
