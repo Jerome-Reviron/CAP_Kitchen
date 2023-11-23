@@ -2,12 +2,14 @@
 class Unite{
     private $Id_Unite;
     private $Nom_Unite;
+    private $Genre;
     private $Chiffre;
     private $Valeur;
 
-    public function __construct($Id_Unite, $Nom_Unite, $Chiffre, $Valeur){
+    public function __construct($Id_Unite, $Nom_Unite, $Genre, $Chiffre, $Valeur){
 
         $this->Nom_Unite = $Nom_Unite;
+        $this->Genre = $Genre;
         $this->Chiffre = $Chiffre;
         $this->Valeur = $Valeur;
         $this->Id_Unite = $Id_Unite;
@@ -18,8 +20,9 @@ class Unite{
 
     public function createUnite() {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare('INSERT INTO Unite (Nom_Unite, Chiffre, Valeur) VALUES (:Nom_Unite, :Chiffre, :Valeur)');
+        $stmt = $bdd->prepare('INSERT INTO Unite (Nom_Unite, Genre, Chiffre, Valeur) VALUES (:Nom_Unite, :Genre, :Chiffre, :Valeur)');
         $stmt->bindParam(':Nom_Unite', $this->Nom_Unite, PDO::PARAM_STR);
+        $stmt->bindParam(':Genre', $this->Genre, PDO::PARAM_STR);
         $stmt->bindParam(':Chiffre', $this->Chiffre, PDO::PARAM_INT);
         $stmt->bindParam(':Valeur', $this->Valeur, PDO::PARAM_STR);
         $stmt->execute();
@@ -49,7 +52,7 @@ class Unite{
         $data = $stmt->fetch();
     
         // Instancier un objet Unite avec les données récupérées
-        $Unite = new Unite($data['Id_Unite'], $data['Nom_Unite'], $data['Chiffre'], $data['Valeur']);
+        $Unite = new Unite($data['Id_Unite'], $data['Nom_Unite'], $data['Genre'],  $data['Chiffre'], $data['Valeur']);
         return $Unite;
     }
     
@@ -57,13 +60,14 @@ class Unite{
 
     //----------------------------------------------- Modifier -----------------------------------------------
     
-    public function postInfoUnite($Id, $Nom_Unite, $Chiffre, $Valeur) {
+    public function postInfoUnite($Id, $Nom_Unite, $Genre, $Chiffre, $Valeur) {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $update = $bdd->prepare("UPDATE Unite SET Nom_Unite = :Nom_Unite, Chiffre = :Chiffre, Valeur = :Valeur WHERE Id_Unite = :Id");
+        $update = $bdd->prepare("UPDATE Unite SET Nom_Unite = :Nom_Unite, Genre = :Genre, Chiffre = :Chiffre, Valeur = :Valeur WHERE Id_Unite = :Id");
     
         // Utilisation de bindParam pour lier les valeurs des variables aux paramètres de la requête préparée
         $update->bindParam(':Id', $Id, PDO::PARAM_INT);
         $update->bindParam(':Nom_Unite', $Nom_Unite, PDO::PARAM_STR);
+        $update->bindParam(':Genre', $Genre, PDO::PARAM_STR);
         $update->bindParam(':Chiffre', $Chiffre, PDO::PARAM_INT);
         $update->bindParam(':Valeur', $Valeur, PDO::PARAM_STR);
     
@@ -79,12 +83,12 @@ class Unite{
         $data = $stmt->fetchAll();
         $Unites = array();
         foreach ($data as $UniteData) {
-            $Unite = new Unite($UniteData['Id_Unite'], $UniteData['Nom_Unite'], $UniteData['Chiffre'], $UniteData['Valeur']);
+            $Unite = new Unite($UniteData['Id_Unite'], $UniteData['Nom_Unite'], $UniteData['Genre'], $UniteData['Chiffre'], $UniteData['Valeur']);
             array_push($Unites, $Unite);
         }
         return $Unites;
     }
-    //$bdd
+    
     //----------------------------------------------- Supprimer -----------------------------------------------//
 
     public function deleteUniteById() {
@@ -103,18 +107,49 @@ class Unite{
             error_log("Erreur lors de la suppression de la Unite : " . $e->getMessage());
             return false;
         }
-    }
+    }    
 
-    //---------------------------------- Récupérer toutes les valeurs distinctes ---------------------------------//
+    //---------------------------------- Récupérer toutes les Genres distinctes ---------------------------------//
+
+    public static function getGenresFromDatabase() {
+        $bdd = bddconnexion::getInstance()->getBdd();
+        $stmt = $bdd->prepare("SELECT DISTINCT Genre FROM Unite"); 
+        $stmt->execute();
+        $Genres = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return $Genres;
+    }    
+    
+    //---------------------------------- Récupérer toutes les Valeurs distinctes ---------------------------------//
 
     public static function getValeursFromDatabase() {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("SELECT DISTINCT Nom_Unite FROM Unite"); 
+        $stmt = $bdd->prepare("SELECT DISTINCT Nom_Unite FROM Unite Where Genre = 'Unité de recette'"); 
         $stmt->execute();
-        $valeurs = $stmt->fetchAll(PDO::FETCH_COLUMN);
-        return $valeurs;
+        $Valeurs = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return $Valeurs;
     }
 
+    //---------------------------------- Récupérer toutes les Conditionnements distinctes ---------------------------------//
+
+    public static function getConditionnementsFromDatabase() {
+        $bdd = bddconnexion::getInstance()->getBdd();
+        $stmt = $bdd->prepare("SELECT DISTINCT Nom_Unite, Chiffre, Valeur FROM Unite WHERE Genre = 'Conditionnement d\'achat'"); 
+        $stmt->execute();
+        $Conditionnements = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $Conditionnements;
+    }    
+
+
+        //---------------------------------- Récupérer toutes les Unites distinctes ---------------------------------//
+
+        public static function getUnitesFromDatabase() {
+            $bdd = bddconnexion::getInstance()->getBdd();
+            $stmt = $bdd->prepare("SELECT DISTINCT Nom_Unite FROM Unite"); 
+            $stmt->execute();
+            $Unites = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            return $Unites;
+        }
+        
     /**
      * Get the value of Id_Unite
      */ 
@@ -151,6 +186,26 @@ class Unite{
     public function setNom_Unite($Nom_Unite)
     {
         $this->Nom_Unite = $Nom_Unite;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Genre
+     */ 
+    public function getGenre()
+    {
+        return $this->Genre;
+    }
+
+    /**
+     * Set the value of Genre
+     *
+     * @return  self
+     */ 
+    public function setGenre($Genre)
+    {
+        $this->Genre = $Genre;
 
         return $this;
     }

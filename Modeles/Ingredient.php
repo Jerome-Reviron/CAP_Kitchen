@@ -1,38 +1,45 @@
 <?php
+
 class Ingredient{
     private $Id_Ingredient;
-    private $Nom;
-    private $Quantite;
-    private $Prix_unite_ht;
-    private $Prix_total_ht;
+    private $Nom_Ingredient;
+    private $Photo;
+    private $Unite_recette;
+    private $Conditionnement_achat;
+    private $Prix_achat;
+    private $Unite_achat;
 
-    public function __construct($Nom, $Quantite, $Prix_unite_ht, $Prix_total_ht, $Id_Ingredient = null){
+    public function __construct($Id_Ingredient, $Nom_Ingredient, $Photo, $Unite_recette, $Conditionnement_achat, $Prix_achat, $Unite_achat){
 
-        $this->Nom = $Nom;
-        $this->Quantite = $Quantite;
-        $this->Prix_unite_ht = $Prix_unite_ht;
-        $this->Prix_total_ht = $Prix_total_ht;
         $this->Id_Ingredient = $Id_Ingredient;
+        $this->Nom_Ingredient = $Nom_Ingredient;
+        $this->Photo = $Photo;
+        $this->Unite_recette = $Unite_recette;
+        $this->Conditionnement_achat = $Conditionnement_achat;
+        $this->Prix_achat = $Prix_achat;
+        $this->Unite_achat = $Unite_achat;
     }
 
-    
     //----------------------------------------------- Creer -----------------------------------------------
 
     public function createIngredient() {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare('INSERT INTO Ingredient (Nom, Quantite, Prix_unite_ht, Prix_total_ht) VALUES (:Nom, :Quantite, :Prix_unite_ht, :Prix_total_ht)');
-        $stmt->bindParam(':Nom', $this->Nom, PDO::PARAM_STR);
-        $stmt->bindParam(':Quantite', $this->Quantite, PDO::PARAM_INT);
-        $stmt->bindParam(':Prix_unite_ht', $this->Prix_unite_ht, PDO::PARAM_INT);
-        $stmt->bindParam(':Prix_total_ht', $this->Prix_total_ht, PDO::PARAM_INT);
+        $stmt = $bdd->prepare('INSERT INTO Ingredient (Nom_Ingredient, Photo, Unite_recette, Conditionnement_achat, Prix_achat, Unite_achat) 
+                                VALUES (:Nom_Ingredient, :Photo, :Unite_recette, :Conditionnement_achat, :Prix_achat, :Unite_achat)');
+        $stmt->bindParam(':Nom_Ingredient', $this->Nom_Ingredient, PDO::PARAM_STR);
+        $stmt->bindParam(':Photo', $this->Photo, PDO::PARAM_STR);
+        $stmt->bindParam(':Unite_recette', $this->Unite_recette, PDO::PARAM_STR);
+        $stmt->bindParam(':Conditionnement_achat', $this->Conditionnement_achat, PDO::PARAM_STR);
+        $stmt->bindParam(':Prix_achat', $this->Prix_achat, PDO::PARAM_INT);
+        $stmt->bindParam(':Unite_achat', $this->Unite_achat, PDO::PARAM_STR);
         $stmt->execute();
     }
     //----------------------------------------------- Vérifier -----------------------------------------------
 
-    public static function checkNomIngredientExists($Nom) {
+    public static function checkNomIngredientExists($Nom_Ingredient) {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("SELECT * FROM Ingredient WHERE Nom = :Nom");
-        $stmt->bindParam(':Nom', $Nom, PDO::PARAM_STR);
+        $stmt = $bdd->prepare("SELECT * FROM Ingredient WHERE Nom_Ingredient = :Nom_Ingredient");
+        $stmt->bindParam(':Nom_Ingredient', $Nom_Ingredient, PDO::PARAM_STR);
         $stmt->execute();
         $data = $stmt->fetchAll();
         $row = $stmt->rowCount();
@@ -52,7 +59,8 @@ class Ingredient{
         $data = $stmt->fetch();
     
         // Instancier un objet Ingredient avec les données récupérées
-        $Ingredient = new Ingredient($data['Id_Ingredient'], $data['Nom'], $data['Quantite'], $data['Prix_unite_ht'], $data['Prix_total_ht']);
+        $Ingredient = new Ingredient($data['Id_Ingredient'], $data['Nom_Ingredient'], $data['Photo'], 
+                                    $data['Unite_recette'], $data['Conditionnement_achat'], $data['Prix_achat'], $data['Unite_achat']);
         return $Ingredient;
     }
     
@@ -60,17 +68,21 @@ class Ingredient{
 
     //----------------------------------------------- Modifier -----------------------------------------------
     
-    public function postInfoIngredient($Id, $Nom, $Quantite, $Prix_unite_ht,$Prix_total_ht) {
+    public function postInfoIngredient($Id, $Nom_Ingredient, $Photo, $Unite_recette, $Conditionnement_achat, $Prix_achat, $Unite_achat) {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $update = $bdd->prepare("UPDATE Ingredient SET Nom = :Nom, Quantite = :Quantite, Prix_unite_ht = :Prix_unite_ht, Prix_total_ht = :Prix_total_ht  WHERE Id_Ingredient = :Id");
+        $update = $bdd->prepare("UPDATE Ingredient SET Nom_Ingredient = :Nom_Ingredient, Photo = :Photo, Unite_recette = :Unite_recette,
+                                Conditionnement_achat = :Conditionnement_achat, Prix_achat = :Prix_achat, Unite_achat = :Unite_achat,
+                                WHERE Id_Ingredient = :Id");
     
         // Utilisation de bindParam pour lier les valeurs des variables aux paramètres de la requête préparée
         $update->bindParam(':Id', $Id, PDO::PARAM_INT);
-        $update->bindParam(':Nom', $Nom, PDO::PARAM_STR);
-        $update->bindParam(':Quantite', $Quantite, PDO::PARAM_INT);
-        $update->bindParam(':Prix_unite_ht', $Prix_unite_ht, PDO::PARAM_INT);
-        $update->bindParam(':Prix_total_ht', $Prix_total_ht, PDO::PARAM_INT);
-
+        $update->bindParam(':Nom_Ingredient', $Nom_Ingredient, PDO::PARAM_STR);
+        $update->bindParam(':Photo', $Photo, PDO::PARAM_STR);
+        $update->bindParam(':Unite_recette', $Unite_recette, PDO::PARAM_STR);
+        $update->bindParam(':Conditionnement_achat', $Conditionnement_achat, PDO::PARAM_STR);
+        $update->bindParam(':Prix_achat', $Prix_achat, PDO::PARAM_INT);
+        $update->bindParam(':Unite_achat', $Unite_achat, PDO::PARAM_STR);
+    
         $update->execute();
     }
 
@@ -81,9 +93,11 @@ class Ingredient{
         $stmt = $bdd->prepare("SELECT * FROM Ingredient");
         $stmt->execute();
         $data = $stmt->fetchAll();
-        $Ingredient = array();
+        $Ingredients = array();
         foreach ($data as $IngredientData) {
-            $Ingredient = new Ingredient($IngredientData['Id_Ingredient'], $IngredientData['Nom'], $IngredientData['Quantite'], $IngredientData['Prix_unite_ht'], $IngredientData['Prix_total_ht']);
+            $Ingredient = new Ingredient($IngredientData['Id_Ingredient'], $IngredientData['Nom_Ingredient'], 
+                                        $IngredientData['Photo'], $IngredientData['Unite_recette'], $IngredientData['Conditionnement_achat'], 
+                                        $IngredientData['Prix_achat'], $IngredientData['Unite_achat']);
             array_push($Ingredients, $Ingredient);
         }
         return $Ingredients;
@@ -103,7 +117,7 @@ class Ingredient{
             }
         } catch (PDOException $e) {
             // Vous pouvez écrire l'erreur dans un fichier journal ou afficher un message d'erreur.
-            error_log("Erreur lors de la suppression de l'Ingredient : " . $e->getMessage());
+            error_log("Erreur lors de la suppression de la Ingredient : " . $e->getMessage());
             return false;
         }
     }
@@ -129,85 +143,125 @@ class Ingredient{
     }
 
     /**
-     * Get the value of Nom
+     * Get the value of Nom_Ingredient
      */ 
-    public function getNom()
+    public function getNom_Ingredient()
     {
-        return $this->Nom;
+        return $this->Nom_Ingredient;
     }
 
     /**
-     * Set the value of Nom
+     * Set the value of Nom_Ingredient
      *
      * @return  self
      */ 
-    public function setNom($Nom)
+    public function setNom_Ingredient($Nom_Ingredient)
     {
-        $this->Nom = $Nom;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Quantite
-     */ 
-    public function getQuantite()
-    {
-        return $this->Quantite;
-    }
-
-    /**
-     * Set the value of Quantite
-     *
-     * @return  self
-     */ 
-    public function setQuantite($Quantite)
-    {
-        $this->Quantite = $Quantite;
+        $this->Nom_Ingredient = $Nom_Ingredient;
 
         return $this;
     }
 
         /**
-     * Get the value of Prix_unite_ht
+     * Get the value of Photo
      */ 
-    public function getPrix_unite_ht()
+    public function getPhoto()
     {
-        return $this->Prix_unite_ht;
+        return $this->Photo;
     }
 
     /**
-     * Set the value of Prix_unite_ht
+     * Set the value of Photo
      *
      * @return  self
      */ 
-    public function setPrix_unite_ht($Prix_unite_ht)
+    public function setPhoto($Photo)
     {
-        $this->Prix_unite_ht = $Prix_unite_ht;
+        $this->Photo = $Photo;
 
         return $this;
     }
 
-            /**
-     * Get the value of Prix_total_ht
+    /**
+     * Get the value of Unite_recette
      */ 
-    public function getPrix_total_ht()
+    public function getUnite_recette()
     {
-        return $this->Prix_total_ht;
+        return $this->Unite_recette;
     }
 
     /**
-     * Set the value of Prix_total_ht
+     * Set the value of Unite_recette
      *
      * @return  self
      */ 
-    public function setPrix_total_ht($Prix_total_ht)
+    public function setUnite_recette($Unite_recette)
     {
-        $this->Prix_total_ht = $Prix_total_ht;
+        $this->Unite_recette = $Unite_recette;
 
         return $this;
     }
 
+    /**
+     * Get the value of Conditionnement_achat
+     */ 
+    public function getConditionnement_achat()
+    {
+        return $this->Conditionnement_achat;
+    }
+
+    /**
+     * Set the value of Conditionnement_achat
+     *
+     * @return  self
+     */ 
+    public function setConditionnement_achat($Conditionnement_achat)
+    {
+        $this->Conditionnement_achat = $Conditionnement_achat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Prix_achat
+     */ 
+    public function getPrix_achat()
+    {
+        return $this->Prix_achat;
+    }
+
+    /**
+     * Set the value of Prix_achat
+     *
+     * @return  self
+     */ 
+    public function setPrix_achat($Prix_achat)
+    {
+        $this->Prix_achat = $Prix_achat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Unite_achat
+     */ 
+    public function getUnite_achat()
+    {
+        return $this->Unite_achat;
+    }
+
+    /**
+     * Set the value of Unite_achat
+     *
+     * @return  self
+     */ 
+    public function setUnite_achat($Unite_achat)
+    {
+        $this->Unite_achat = $Unite_achat;
+
+        return $this;
+    }
+    
 }
-?>
 
+?>

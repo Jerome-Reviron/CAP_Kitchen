@@ -14,17 +14,18 @@ if (isset($_SESSION['Admin'])) {
             $Unite = Unite::getInfoUnite($Id);
 
             // Validation des données
-            if (!empty($_POST['Nom_Unite']) && !empty($_POST['Chiffre']) && !empty($_POST['Valeur'])) {
+            if (!empty($_POST['Nom_Unite']) && !empty($_POST['Genre']) && !empty($_POST['Chiffre']) && !empty($_POST['Valeur'])) {
 
                 $Securiter->verifyCsrfToken($_POST['csrf_token']);
                 
                 // Patch XSS
                 $Nom_Unite = htmlspecialchars($_POST['Nom_Unite']);
+                $Genre = htmlspecialchars($_POST['Genre']);
                 $Chiffre = htmlspecialchars($_POST['Chiffre']);
                 $Valeur = htmlspecialchars($_POST['Valeur']);
 
                 // Mise à jour des données dans la base de données
-                $Unite->postInfoUnite($Id, $Nom_Unite, $Chiffre, $Valeur);
+                $Unite->postInfoUnite($Id, $Nom_Unite, $Genre, $Chiffre, $Valeur);
 
                 // Redirection vers une autre page
                 header("Location: index.php?uc=admin_modifier_unite");

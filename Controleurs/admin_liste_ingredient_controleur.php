@@ -9,15 +9,17 @@ if (isset($_SESSION['Admin'])) {
                 echo '
                 <div class="liste_admin">
                         <form class="form">
-                                <h2 class="adminh2">Liste des Unités</h2>
+                                <h2 class="adminh2">Liste des Ingredients</h2>
                                 <table id="myTable">
                                         <thead>
                                                 <tr>
-                                                        <th class="sortable">Id Unité</th>
+                                                        <th class="sortable">Id Ingredient</th>
                                                         <th class="sortable">Nom</th>
-                                                        <th class="sortable">Genre</th>
-                                                        <th class="sortable">Chiffre</th>
-                                                        <th class="sortable">Valeur</th>
+                                                        <th class="sortable">Photo</th>
+                                                        <th class="sortable">Unite de recette</th>
+                                                        <th class="sortable">Conditionnement d\'achat</th>
+                                                        <th class="numeric">Prix d\'achat</th>
+                                                        <th class="sortable">Unite d\'achat</th>
                                                         <th>Modifier</th>
                                                         <th>Supprimer</th>
                                                 </tr>
@@ -25,25 +27,25 @@ if (isset($_SESSION['Admin'])) {
                                         <tbody>';
 
                 // Récupération des données de la base de données
-                $Unites = Unite::getAllUnite();
+                $Ingredients = Ingredient::getAllIngredient();
 
-                // Fonction de comparaison pour trier les Unites par Id_Unite
-                function compareId_Unite($a, $b) {
-                        return $a->getId_Unite() - $b->getId_Unite();
+                // Fonction de comparaison pour trier les Ingredients par Id_Ingredient
+                function compareId_Ingredient($a, $b) {
+                        return $a->getId_Ingredient() - $b->getId_Ingredient();
                 }
 
-                // Tri des Unites par Id_Unite
-                usort($Unites, 'compareId_Unite');
+                // Tri des Ingredients par Id_Ingredient
+                usort($Ingredients, 'compareId_Ingredient');
 
-                // Utilisez une boucle foreach pour inclure le fichier 'admin_liste_Unite_vue.php'
-                foreach ($Unites as $Unite) {                        
-                        include './Vues/admin_liste_unite_vue.php';
+                // Utilisez une boucle foreach pour inclure le fichier 'admin_liste_Ingredient_vue.php'
+                foreach ($Ingredients as $Ingredient) {                        
+                        include './Vues/admin_liste_ingredient_vue.php';
                 }
 
                 echo '                  </tbody>
                                 </table>
                                 <p>
-                                        <a class="top-rectangle-button" href="./index.php?uc=admin_creer_unite">Créer</a>
+                                        <a class="top-rectangle-button" href="./index.php?uc=admin_creer_ingredient">Créer</a>
                                         <a class="top-rectangle-button" href="./index.php?uc=admin_accueil">Retour</a>
                                 </p>
                         </form>
@@ -56,4 +58,4 @@ if (isset($_SESSION['Admin'])) {
         header('Location:./index.php?uc=admin_connexion');
 }
 ?>
-<script type="text/javascript" src="./Vues/JS/unite_liste.js"></script>
+<script type="text/javascript" src="./Vues/JS/ingredient_liste.js"></script>

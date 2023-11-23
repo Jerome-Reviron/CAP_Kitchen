@@ -15,8 +15,8 @@ if (isset($_SESSION['Admin'])) {
             $Securiter->verifyCsrfToken($_POST['csrf_token']);
             
             // Patch XSS
-            $Nom_Categorie =  htmlspecialchars($_POST['Nom_Categorie']);
-            $Genre =  htmlspecialchars($_POST['Genre']);
+            $Nom_Categorie =  htmlspecialchars(trim(strip_tags($_POST['Nom_Categorie'])));
+            $Genre =  htmlspecialchars(trim(strip_tags($_POST['Genre'])));
 
             $bdd = bddconnexion::getInstance();
             // Instanciation de la classe Categorie

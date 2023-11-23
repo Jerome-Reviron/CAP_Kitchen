@@ -8,10 +8,20 @@
                 <span>Nom</span>
             </div>
             <div class="inputBox">
-                <select style="width: 300px" name="Genre" required="required">
-                    <option value="Ingrédient">Ingrédient</option>
-                    <option value="Recette">Recette</option>
-                </select>       
+                <select style="width: 300px;" name="Genre" required="required">
+                    <?php
+                    // Récupérer les Genres depuis la base de données
+                    $Genres = Categorie::getGenresFromDatabase();
+
+                    // Parcourir les Genres pour les afficher comme options dans la liste déroulante
+                    foreach ($Genres as $Genre) {
+                        // Si la Genre correspond à celle de l'unité actuelle, sélectionnez-la
+                        $selected = ($Genre == $Categorie->getGenre()) ? 'selected' : '';
+
+                        echo "<option value='{$Genre}' {$selected}>{$Genre}</option>";
+                    }
+                    ?>
+                </select>        
                 <i class="fa-solid fa-tags"></i>        
                 <span>Genre</span>
             </div>

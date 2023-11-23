@@ -15,15 +15,16 @@ if (isset($_SESSION['Admin'])) {
             $Securiter->verifyCsrfToken($_POST['csrf_token']);
             
             // Patch XSS
-            $Nom_Unite =  htmlspecialchars($_POST['Nom_Unite']);
-            $Chiffre =  htmlspecialchars($_POST['Chiffre']);
-            $Valeur =  htmlspecialchars($_POST['Valeur']);
+            $Nom_Unite =  htmlspecialchars(trim(strip_tags($_POST['Nom_Unite'])));
+            $Genre =  htmlspecialchars(trim(strip_tags($_POST['Genre'])));
+            $Chiffre =  htmlspecialchars(trim(strip_tags($_POST['Chiffre'])));
+            $Valeur =  htmlspecialchars(trim(strip_tags($_POST['Valeur'])));
 
             echo "Nom de l'Unité' (après htmlspecialchars) : " . $Nom_Unite . "<br>";
 
             $bdd = bddconnexion::getInstance();
             // Instanciation de la classe Unite
-            $Unite = new Unite(NULL, $Nom_Unite, $Chiffre, $Valeur);
+            $Unite = new Unite(NULL, $Nom_Unite, $Genre, $Chiffre, $Valeur);
 
             // Vérifie si la Catégorie existe déjà
             $Nom_UniteExiste = Unite::checkNomUniteExists($Nom_Unite);

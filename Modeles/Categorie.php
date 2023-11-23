@@ -100,6 +100,16 @@ class Categorie{
         }
     }
 
+    //---------------------------------- Récupérer toutes les Genres distinctes ---------------------------------//
+
+    public static function getGenresFromDatabase() {
+        $bdd = bddconnexion::getInstance()->getBdd();
+        $stmt = $bdd->prepare("SELECT DISTINCT Genre FROM Categorie"); 
+        $stmt->execute();
+        $Genres = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return $Genres;
+    }   
+
     /**
      * Get the value of Id_Categorie
      */ 
