@@ -10,7 +10,7 @@
             <div class="inputBox">
                 <select style="width: 300px" name="Genre" required="required">
                     <option value="Unité de recette">Unité de recette</option>
-                    <option value="Conditionnement d\'achat">Conditionnement d'achat</option>
+                    <option value="Conditionnement achat">Conditionnement d'achat</option>
                 </select>
                 <i class="fa-solid fa-hashtag"></i>
                 <span>Genre</span>

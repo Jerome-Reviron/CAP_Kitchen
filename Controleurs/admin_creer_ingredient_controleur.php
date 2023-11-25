@@ -59,3 +59,4 @@ if (isset($_SESSION['Admin'])) {
 }
 
 ?>
+<script type="text/javascript" src="./Vues/JS/ingredient_creer.js"></script>

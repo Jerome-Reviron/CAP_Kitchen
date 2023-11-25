@@ -133,7 +133,7 @@ class Unite{
 
     public static function getConditionnementsFromDatabase() {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("SELECT DISTINCT Nom_Unite, Chiffre, Valeur FROM Unite WHERE Genre = 'Conditionnement d\'achat'"); 
+        $stmt = $bdd->prepare("SELECT DISTINCT Nom_Unite, Chiffre, Valeur FROM Unite WHERE Genre = 'Conditionnement achat'"); 
         $stmt->execute();
         $Conditionnements = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $Conditionnements;

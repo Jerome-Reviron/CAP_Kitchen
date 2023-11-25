@@ -709,6 +709,10 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     margin: 5px 0;
 }
 
+.Panel_boss_inscription .Administrateur .form .inputBox select{
+    width: 300px;
+}
+
 .Panel_boss_inscription .Administrateur .form .inputBox input, select {
     padding: 13px 0px 12px 45px;
     border: none;
@@ -725,11 +729,6 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     transition: 0.5s;
     outline: none;
 }
-
-.Panel_boss_inscription .Administrateur .form .inputBox  select {
-    width: 300px;
-}
-
 
 .Panel_boss_inscription .Administrateur .form .inputBox span {
     position: absolute;
@@ -795,6 +794,57 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
         inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
     box-shadow: -5px -5px 15px rgba(187, 187, 187, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35), 
         inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.Panel_boss_inscription .optionsValeursDiv,
+.Panel_boss_inscription .optionsConditionnementsDiv,
+.Panel_boss_inscription .optionsUnitesDiv {
+    display: none;
+    position: absolute;
+    width: 200px;
+    top:35%;
+    left:5%;
+    background: #1a2d40;
+    color: #9D8A57;
+    border: 1px solid #9D8A57;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+
+.Panel_boss_inscription .optionsValeursDiv .scrollable-container,
+.Panel_boss_inscription .optionsConditionnementsDiv .scrollable-container,
+.Panel_boss_inscription .optionsUnitesDiv .scrollable-container {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.scrollable-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+    background-color: #9D8A57;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+    background-color: #1a2d40; 
+}
+
+.Panel_boss_inscription .optionsValeursDiv .valeursButton,
+.Panel_boss_inscription .optionsConditionnementsDiv .conditionnementsButton,
+.Panel_boss_inscription .optionsUnitesDiv .unitesButton {
+    justify-content: baseline;
+    align-items: center;
+    width: 100%;
+    background:#9D8A57;
+    border: 1px solid #9D8A57;
+    color: #1A2D40;
+    padding: 10px 0;
+    margin-top: 10px;
+    font-family: 'Merriweather', serif;
+    cursor: pointer;
+    border-radius: 25px;
 }
 
 .Panel_boss_inscription .Administrateur .form table thead {
