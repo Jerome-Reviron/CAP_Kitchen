@@ -1146,6 +1146,12 @@ background-color: #9D8A57;
     max-width: 55px;
     overflow: hidden;
 }
+
+.liste_admin table tbody tr td img.photo {
+    width:60px;
+    height: auto;
+}
+
 .liste_admin table tbody tr td a img{
     width: 40px;
     padding: 5px 5px 5px 15px;
@@ -1281,10 +1287,6 @@ background-color: #9D8A57;
 .Panel_TVA .Administrateur .form .inputBox input:valid,
 .Panel_TVA .Administrateur .form .inputBox input:focus{
     border: 1px solid #9D8A57;
-}
-
-.Panel_TVA .Administrateur .form .inputBox input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper {
-    display: none;
 }
 
 .Panel_TVA .Administrateur .form .inputBox i{

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Construire une chaîne avec les valeurs des cases à cocher séparées par "/"
         var selectedValues = Array.from(checkedCheckboxes).map(function (checkbox) {
             return checkbox.value;
-        }).join("/");
+        }).join(" / ");
 
         // Mettre à jour l'input Unite_recette avec les valeurs sélectionnées
         uniteRecetteInput.value = selectedValues;

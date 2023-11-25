@@ -27,10 +27,10 @@ class Ingredient{
         $stmt = $bdd->prepare('INSERT INTO Ingredient (Nom_Ingredient, Photo, Unite_recette, Conditionnement_achat, Prix_achat, Unite_achat) 
                                 VALUES (:Nom_Ingredient, :Photo, :Unite_recette, :Conditionnement_achat, :Prix_achat, :Unite_achat)');
         $stmt->bindParam(':Nom_Ingredient', $this->Nom_Ingredient, PDO::PARAM_STR);
-        $stmt->bindParam(':Photo', $this->Photo, PDO::PARAM_STR);
+        $stmt->bindParam(':Photo', $this->Photo, PDO::PARAM_LOB);
         $stmt->bindParam(':Unite_recette', $this->Unite_recette, PDO::PARAM_STR);
         $stmt->bindParam(':Conditionnement_achat', $this->Conditionnement_achat, PDO::PARAM_STR);
-        $stmt->bindParam(':Prix_achat', $this->Prix_achat, PDO::PARAM_INT);
+        $stmt->bindParam(':Prix_achat', $this->Prix_achat, PDO::PARAM_STR);
         $stmt->bindParam(':Unite_achat', $this->Unite_achat, PDO::PARAM_STR);
         $stmt->execute();
     }
@@ -71,16 +71,16 @@ class Ingredient{
     public function postInfoIngredient($Id, $Nom_Ingredient, $Photo, $Unite_recette, $Conditionnement_achat, $Prix_achat, $Unite_achat) {
         $bdd = bddconnexion::getInstance()->getBdd();
         $update = $bdd->prepare("UPDATE Ingredient SET Nom_Ingredient = :Nom_Ingredient, Photo = :Photo, Unite_recette = :Unite_recette,
-                                Conditionnement_achat = :Conditionnement_achat, Prix_achat = :Prix_achat, Unite_achat = :Unite_achat,
+                                Conditionnement_achat = :Conditionnement_achat, Prix_achat = :Prix_achat, Unite_achat = :Unite_achat
                                 WHERE Id_Ingredient = :Id");
     
         // Utilisation de bindParam pour lier les valeurs des variables aux paramètres de la requête préparée
         $update->bindParam(':Id', $Id, PDO::PARAM_INT);
         $update->bindParam(':Nom_Ingredient', $Nom_Ingredient, PDO::PARAM_STR);
-        $update->bindParam(':Photo', $Photo, PDO::PARAM_STR);
+        $update->bindParam(':Photo', $Photo, PDO::PARAM_LOB);
         $update->bindParam(':Unite_recette', $Unite_recette, PDO::PARAM_STR);
         $update->bindParam(':Conditionnement_achat', $Conditionnement_achat, PDO::PARAM_STR);
-        $update->bindParam(':Prix_achat', $Prix_achat, PDO::PARAM_INT);
+        $update->bindParam(':Prix_achat', $Prix_achat, PDO::PARAM_STR);
         $update->bindParam(':Unite_achat', $Unite_achat, PDO::PARAM_STR);
     
         $update->execute();

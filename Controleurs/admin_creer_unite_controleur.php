@@ -20,7 +20,8 @@ if (isset($_SESSION['Admin'])) {
             $Chiffre =  htmlspecialchars(trim(strip_tags($_POST['Chiffre'])));
             $Valeur =  htmlspecialchars(trim(strip_tags($_POST['Valeur'])));
 
-            echo "Nom de l'Unité' (après htmlspecialchars) : " . $Nom_Unite . "<br>";
+            $Chiffre = str_replace(',', '.', $Chiffre);
+            $Chiffre = number_format($Chiffre, 2, '.', '');
 
             $bdd = bddconnexion::getInstance();
             // Instanciation de la classe Unite

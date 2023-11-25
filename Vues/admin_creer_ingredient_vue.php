@@ -1,6 +1,6 @@
 <div class="Panel_boss_inscription">
     <div class="Administrateur">
-        <form class="form" action="index.php?uc=admin_creer_categorie" method="post">
+        <form class="form" action="index.php?uc=admin_creer_ingredient" method="post" enctype="multipart/form-data">
             <h2 class="admintitleh2">Créer un Ingrédient</h2>
             <div class="inputBox">
                 <input type="text" name="Nom_Ingredient" required="required" autocomplete="off">
@@ -8,7 +8,7 @@
                 <span>Nom</span>
             </div>
             <div class="inputBox">
-                <input type="text" name="Photo" required="required" autocomplete="off">
+                <input type="file" name="Photo" accept="image/*" required="required">
                 <i class="fa-solid fa-hashtag"></i>
                 <span>Photo</span>
             </div>

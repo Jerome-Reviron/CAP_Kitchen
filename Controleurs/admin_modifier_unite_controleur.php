@@ -24,6 +24,9 @@ if (isset($_SESSION['Admin'])) {
                 $Chiffre = htmlspecialchars($_POST['Chiffre']);
                 $Valeur = htmlspecialchars($_POST['Valeur']);
 
+                $Chiffre = str_replace(',', '.', $Chiffre);
+                $Chiffre = number_format($Chiffre, 2, '.', '');    
+
                 // Mise à jour des données dans la base de données
                 $Unite->postInfoUnite($Id, $Nom_Unite, $Genre, $Chiffre, $Valeur);
 

@@ -1,7 +1,7 @@
 <tr>
     <td class="bossu"><?php echo $Ingredient->getId_Ingredient() ?></td>
     <td class="bossu"><?php echo $Ingredient->getNom_Ingredient() ?></td>
-    <td class="bossu"><?php echo $Ingredient->getPhoto() ?></td>
+    <td class="bossu"><img class="photo" src="data:image/jpeg;base64,<?php echo base64_encode($Ingredient->getPhoto()) ?>" alt="Ingredient Photo"></td>   
     <td class="bossu"><?php echo $Ingredient->getUnite_recette() ?></td>
     <td class="bossu"><?php echo $Ingredient->getConditionnement_achat() ?></td>
     <td class="bossu"><?php echo $Ingredient->getPrix_achat() ?></td>

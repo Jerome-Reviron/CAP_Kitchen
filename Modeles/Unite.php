@@ -23,7 +23,7 @@ class Unite{
         $stmt = $bdd->prepare('INSERT INTO Unite (Nom_Unite, Genre, Chiffre, Valeur) VALUES (:Nom_Unite, :Genre, :Chiffre, :Valeur)');
         $stmt->bindParam(':Nom_Unite', $this->Nom_Unite, PDO::PARAM_STR);
         $stmt->bindParam(':Genre', $this->Genre, PDO::PARAM_STR);
-        $stmt->bindParam(':Chiffre', $this->Chiffre, PDO::PARAM_INT);
+        $stmt->bindParam(':Chiffre', $this->Chiffre, PDO::PARAM_STR);
         $stmt->bindParam(':Valeur', $this->Valeur, PDO::PARAM_STR);
         $stmt->execute();
     }
@@ -46,7 +46,7 @@ class Unite{
         $stmt = $bdd->prepare("SELECT * FROM Unite WHERE Id_Unite = :Id");
     
         // Utilisation de bindParam pour lier la valeur de la variable $Id au paramètre :Id
-        $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
+        $stmt->bindParam(':Id', $Id, PDO::PARAM_STR);
         
         $stmt->execute();
         $data = $stmt->fetch();
@@ -65,10 +65,10 @@ class Unite{
         $update = $bdd->prepare("UPDATE Unite SET Nom_Unite = :Nom_Unite, Genre = :Genre, Chiffre = :Chiffre, Valeur = :Valeur WHERE Id_Unite = :Id");
     
         // Utilisation de bindParam pour lier les valeurs des variables aux paramètres de la requête préparée
-        $update->bindParam(':Id', $Id, PDO::PARAM_INT);
+        $update->bindParam(':Id', $Id, PDO::PARAM_STR);
         $update->bindParam(':Nom_Unite', $Nom_Unite, PDO::PARAM_STR);
         $update->bindParam(':Genre', $Genre, PDO::PARAM_STR);
-        $update->bindParam(':Chiffre', $Chiffre, PDO::PARAM_INT);
+        $update->bindParam(':Chiffre', $Chiffre, PDO::PARAM_STR);
         $update->bindParam(':Valeur', $Valeur, PDO::PARAM_STR);
     
         $update->execute();
