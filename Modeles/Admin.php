@@ -142,12 +142,12 @@ class Admin{
 
     //------------------------------------------------------------ Modifier ------------------------------------------------------------
 
-    public function postInfoAdmin($Nom, $Prenom, $Pseudo, $Password, $Adresse, $Telephone, $Email, $Role, $Id_Entreprise, $Id) {
+    public function postInfoAdmin($Nom, $Prenom, $Pseudo, $Password, $Adresse, $Telephone, $Email, $Role, $Id) {
         $bdd = bddconnexion::getInstance()->getBdd();
 
         // Mise à jour de la table Admin
         $updateAdmin = $bdd->prepare("UPDATE Admin SET Nom = :Nom, Prenom = :Prenom, Pseudo = :Pseudo, 
-                                            Password = :Password, Adresse = :Adresse, Telephone = :Telephone, Email = :Email, Role = :Role, Id_Entreprise = :Id_Entreprise
+                                            Password = :Password, Adresse = :Adresse, Telephone = :Telephone, Email = :Email, Role = :Role
                                             WHERE Id_Admin = :Id");
         $updateAdmin->bindParam(':Id', $Id, PDO::PARAM_INT);
         $updateAdmin->bindParam(':Nom', $Nom, PDO::PARAM_STR);
@@ -158,7 +158,6 @@ class Admin{
         $updateAdmin->bindParam(':Telephone', $Telephone, PDO::PARAM_STR);
         $updateAdmin->bindParam(':Email', $Email, PDO::PARAM_STR);
         $updateAdmin->bindParam(':Role', $Role, PDO::PARAM_INT);
-        $updateAdmin->bindParam(':Id_Entreprise', $Id_Entreprise, PDO::PARAM_INT);
 
         $updateAdminResult = $updateAdmin->execute();
 

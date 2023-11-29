@@ -15,7 +15,7 @@ if (isset($_SESSION['Admin'])) {
            // Si les variables existent et qu'elles ne sont pas vides
             if(!empty($_POST['Nom']) && !empty($_POST['Prenom']) && !empty($_POST['Pseudo'])
             && !empty($_POST['Password']) && !empty($_POST['Password_retype']) && !empty($_POST['Adresse']) && !empty($_POST['Telephone']) 
-            && !empty($_POST['Email']) && !empty($_POST['Role']) && !empty($_POST['Id_Entreprise']))
+            && !empty($_POST['Email']) && !empty($_POST['Role']))
             {   
             
                 $Securiter->verifyCsrfToken($_POST['csrf_token']);
@@ -30,7 +30,6 @@ if (isset($_SESSION['Admin'])) {
                 $Telephone = htmlspecialchars(trim(strip_tags($_POST['Telephone'])));
                 $Email = strtolower(htmlspecialchars(trim(strip_tags($_POST['Email']))));
                 $Role = htmlspecialchars(trim(strip_tags($_POST['Role'])));
-                $Id_Entreprise = htmlspecialchars(trim(strip_tags($_POST['Id_Entreprise'])));
                 
                 if(strlen($Pseudo) <= 20){ // On vérifie que la longueur du pseudo <= 20
                     if (ctype_digit($Telephone)) {
@@ -44,7 +43,7 @@ if (isset($_SESSION['Admin'])) {
                                             $Password = password_hash($Password, PASSWORD_ARGON2ID);
 
                                             //Mise à jour des données dans la base de données
-                                            $updateAdminResult = $Admin->postInfoAdmin($Nom, $Prenom, $Pseudo, $Password, $Adresse, $Telephone, $Email, $Role,$Id_Entreprise, $Id);
+                                            $updateAdminResult = $Admin->postInfoAdmin($Nom, $Prenom, $Pseudo, $Password, $Adresse, $Telephone, $Email, $Role, $Id);
 
                                             if ($updateAdminResult ) {
                                                 //Redirection vers une autre page
@@ -96,4 +95,3 @@ if (isset($_SESSION['Admin'])) {
 }
 ?>
 <script type="text/javascript" src="./Vues/JS/admin_modif.js"></script>
-

@@ -24,6 +24,8 @@
     include './Modeles/Unite.php'; 
     include './Modeles/Categorie.php'; 
     include './Modeles/Fournisseur.php'; 
+    include './Modeles/Entreprise.php'; 
+
 
     if(!isset($_SESSION)){
         session_start();
