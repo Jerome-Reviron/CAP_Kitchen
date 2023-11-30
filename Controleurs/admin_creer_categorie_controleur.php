@@ -1,12 +1,12 @@
 <?php
 
 if (isset($_SESSION['Admin'])) {
-    
-    $Securiter = new Securiter();
 
     $Id_Admin = $_SESSION['Admin']->getId_Admin();
     $Admin = Admin::getInfoAdmin($Id_Admin);
     $droit = $Admin->getRole();
+    
+    $Securiter = new Securiter();
 
     if ($droit == 1 || $droit == 2) {
 
@@ -23,12 +23,12 @@ if (isset($_SESSION['Admin'])) {
             $Categorie = new Categorie(NULL, $Nom_Categorie, $Genre);
 
             // Vérifie si la Catégorie existe déjà
-            $Nom_CategorieExiste = Categorie::checkNomCategorieExists($Nom_Categorie);
+            $Nom_CategorieExiste = Categorie::checkNomCategorieExists($Nom_Categorie,$Admin->getId_Entreprise());
                         
-            if(sizeof($Nom_CategorieExiste) == 0) {
+            if(sizeof($Nom_CategorieExiste) > 0) {
                 // Création de la Catégorie
                 echo "Création de la Catégorie...<br>";
-                $Categorie->createCategorie();
+                $Categorie->createCategorie($Id_Admin);
                 echo "Catégorie créée avec succès.<br>";
 
                 // Redirection vers la page d'accueil

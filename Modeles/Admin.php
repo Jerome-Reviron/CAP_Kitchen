@@ -102,21 +102,27 @@ class Admin{
 
     //----------------------------------------------- Object -----------------------------------------------
 
-    public static function getAllAdmin() {
+    public static function getAllAdmin($IdEntrepriseSession) {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("SELECT * FROM Admin");
+        $stmt = $bdd->prepare("SELECT * FROM Admin WHERE Id_Entreprise = :Id_Entreprise");
+        $stmt->bindParam(':Id_Entreprise', $IdEntrepriseSession, PDO::PARAM_INT);
         $stmt->execute();
         $data = $stmt->fetchAll();
         $Admins = array();
+        
         foreach ($data as $Admindata) {
-            $Admin = new Admin($Admindata['Nom'], $Admindata['Prenom'], $Admindata['Pseudo'], $Admindata['Password'], 
-                                $Admindata['Adresse'], $Admindata['Telephone'], $Admindata['Email'],
-                                $Admindata['Role'], $Admindata['Id_Entreprise'], $Admindata['Id_Admin']);
+            $Admin = new Admin(
+                $Admindata['Nom'], $Admindata['Prenom'], $Admindata['Pseudo'], $Admindata['Password'], 
+                $Admindata['Adresse'], $Admindata['Telephone'], $Admindata['Email'],
+                $Admindata['Role'], $Admindata['Id_Entreprise'], $Admindata['Id_Admin']
+            );
             
             array_push($Admins, $Admin);
         }
+        
         return $Admins;
     }
+    
 
     //----------------------------------------------- Supprimer -----------------------------------------------
     

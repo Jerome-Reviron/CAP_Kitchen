@@ -1,11 +1,11 @@
 <?php 
 if (isset($_SESSION['Admin'])) {
-    
-    $Securiter = new Securiter();
-
     $Id_Admin = $_SESSION['Admin']->getId_Admin();
     $Admin = Admin::getInfoAdmin($Id_Admin);
     $droit = $Admin->getRole();
+
+    $Securiter = new Securiter();
+
 
     if ($droit == 1 || $droit == 2) {
 
@@ -36,7 +36,6 @@ if (isset($_SESSION['Admin'])) {
         include './Vues/admin_modifier_categorie_vue.php';
     } else {
         header('Location: index.php?uc=admin_accueil');
-        exit();
     }
 } else {
     header('Location:./index.php?uc=admin_connexion');

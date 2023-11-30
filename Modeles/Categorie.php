@@ -14,19 +14,36 @@ class Categorie{
 
     //----------------------------------------------- Creer -----------------------------------------------
 
-    public function createCategorie() {
+    public function createCategorie($Id_Admin) {
         $bdd = bddconnexion::getInstance()->getBdd();
         $stmt = $bdd->prepare('INSERT INTO Categorie (Nom_Categorie, Genre) VALUES (:Nom_Categorie, :Genre)');
         $stmt->bindParam(':Nom_Categorie', $this->Nom_Categorie, PDO::PARAM_STR);
         $stmt->bindParam(':Genre', $this->Genre, PDO::PARAM_STR);
         $stmt->execute();
+    
+        // Récupérer l'ID de la catégorie nouvellement créée
+        $Id_Categorie = $bdd->lastInsertId();
+    
+        // Insérer dans la table Propose
+        $stmtPropose = $bdd->prepare('INSERT INTO Propose (Id_Admin, Id_Categorie) VALUES (:Id_Admin, :Id_Categorie)');
+        $stmtPropose->bindParam(':Id_Admin', $Id_Admin, PDO::PARAM_INT);
+        $stmtPropose->bindParam(':Id_Categorie', $Id_Categorie, PDO::PARAM_INT);
+        $stmtPropose->execute();
+    
+        // Si besoin de l'ID de la catégorie dans d'autres parties de votre code, le retour :
+        // return $Id_Categorie;
     }
+    
     //----------------------------------------------- Vérifier -----------------------------------------------
 
-    public static function checkNomCategorieExists($Nom_Categorie) {
-        $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("SELECT * FROM Categorie WHERE Nom_Categorie = :Nom_Categorie");
+    public static function checkNomCategorieExists($Nom_Categorie, $Id_Entreprise) {
+        $stmt = bddconnexion::getInstance()->getBdd()->prepare("SELECT C.* 
+                                                                FROM Categorie C
+                                                                JOIN Propose P ON C.Id_Categorie = P.Id_Categorie
+                                                                JOIN Admin A ON P.Id_Admin = A.Id_Admin
+                                                                WHERE Nom_Categorie = :Nom_Categorie AND A.Id_Entreprise != :Id_Entreprise");
         $stmt->bindParam(':Nom_Categorie', $Nom_Categorie, PDO::PARAM_STR);
+        $stmt->bindParam(':Id_Entreprise', $Id_Entreprise, PDO::PARAM_INT);
         $stmt->execute();
         $data = $stmt->fetchAll();
         $row = $stmt->rowCount();
@@ -68,19 +85,25 @@ class Categorie{
 
     //----------------------------------------------- Object -----------------------------------------------
 
-    public static function getAllCategorie() {
-        $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("SELECT * FROM Categorie");
-        $stmt->execute();
-        $data = $stmt->fetchAll();
-        $Categories = array();
-        foreach ($data as $CategorieData) {
-            $Categorie = new Categorie($CategorieData['Id_Categorie'], $CategorieData['Nom_Categorie'], $CategorieData['Genre']);
-            array_push($Categories, $Categorie);
-        }
-        return $Categories;
+    public static function getAllCategorie($IdEntrepriseSession) {
+    $bdd = bddconnexion::getInstance()->getBdd();
+    $stmt = $bdd->prepare("SELECT C.* 
+                            FROM Categorie C
+                            JOIN Propose P ON C.Id_Categorie = P.Id_Categorie
+                            JOIN Admin A ON P.Id_Admin = A.Id_Admin
+                            WHERE A.Id_Entreprise = :Id_Entreprise");
+    $stmt->bindParam(':Id_Entreprise', $IdEntrepriseSession, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetchAll();
+    $Categories = array();
+    foreach ($data as $CategorieData) {
+        $Categorie = new Categorie($CategorieData['Id_Categorie'], $CategorieData['Nom_Categorie'], $CategorieData['Genre']);
+        array_push($Categories, $Categorie);
     }
-    //$bdd
+    return $Categories;
+}
+
+    
     //----------------------------------------------- Supprimer -----------------------------------------------
     public function deleteCategorieById() {
         try {

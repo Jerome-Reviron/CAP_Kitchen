@@ -3,14 +3,14 @@ if (isset($_SESSION['Admin'])) {
     $Id_Admin = $_SESSION['Admin']->getId_Admin(); 
     $Admin = Admin::getInfoAdmin($Id_Admin);
     $droit = $Admin->getRole();
-    if ($droit == 1 || $droit == 2) {
 
-        $Securiter = new Securiter();
+    $Securiter = new Securiter();
+
+    if ($droit == 1 || $droit == 2) {
 
         if(isset($_GET['Id'])){
             $Id = htmlspecialchars($_GET['Id']);
-            $Id_Fournisseur = $Id;
-            $Fournisseur = Fournisseur::getInfoFournisseur($Id_Fournisseur);
+            $Fournisseur = Fournisseur::getInfoFournisseur($Id);
             
             // Si les variables existent et qu'elles ne sont pas vides
             if(!empty($_POST['Forme_Juridique']) && !empty($_POST['Nom_Fournisseur'])
@@ -34,30 +34,22 @@ if (isset($_SESSION['Admin'])) {
                             if(strlen($Adresse) <= 250){ // On vérifie que la longueur du adresse <= 250
 
                                 //Mise à jour des données dans la base de données
-                                $updateFournisseurResult = $Fournisseur->postInfoFournisseur($Forme_Juridique,$Nom_Fournisseur,$Adresse,$Telephone,$Email,$Numero_SIRET, $Id);
+                                $Fournisseur->postInfoFournisseur($Id, $Forme_Juridique,$Nom_Fournisseur,$Adresse,$Telephone,$Email,$Numero_SIRET);
 
-                                if ($updateFournisseurResult ) {
-                                    //Redirection vers une autre page
-                                    header("Location: index.php?uc=admin_liste_fournisseur");
-                                } else {
-                                    // Afficher un message d'erreur ou rediriger vers une page d'erreur
-                                    header("Location: index.php?uc=admin_modifier_fournisseur&reg_err=Loupé");
-                                }
+                                // Afficher un message d'erreur ou rediriger vers une page d'erreur
+                                header("Location: index.php?uc=admin_liste_fournisseur");
                             }else{ 
                                 header('Location: index.php?uc=admin_modifier_fournisseur&reg_err=adresse_length'); 
-                                exit();
+        
                             }
                         }else{ 
                             header('Location: index.php?uc=admin_modifier_fournisseur&reg_err=email');
-                            exit();
                         }
                     }else{ 
                         header('Location: index.php?uc=admin_modifier_fournisseur&reg_err=email_length'); 
-                        exit();
                     }
                 }else{ 
                     header('Location: index.php?uc=admin_modifier_fournisseur&reg_err=telephone_length'); 
-                    exit();
                 }
             } else {
                 // Génère et stocke un nouveau jeton CSRF dans la session
@@ -74,4 +66,3 @@ if (isset($_SESSION['Admin'])) {
     header('Location:./index.php?uc=admin_connexion');
 }
 ?>
-

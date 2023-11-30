@@ -28,7 +28,7 @@ if (isset($_SESSION['Admin'])) {
                                         <tbody>';
 
                 // Récupération des données de la base de données
-                $Fournisseurs = Fournisseur::getAllFournisseur();
+                $Fournisseurs = Fournisseur::getAllFournisseur($Admin->getId_Entreprise());
 
                 // Fonction de comparaison pour trier les Fournisseurs par Id_Fournisseur
                 function compareId_Fournisseur($a, $b) {

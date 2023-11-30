@@ -23,7 +23,7 @@ if (isset($_SESSION['Admin'])) {
                                         <tbody>';
 
                 // Récupération des données de la base de données
-                $Categories = Categorie::getAllCategorie();
+                $Categories = Categorie::getAllCategorie($Admin->getId_Entreprise());
 
                 // Fonction de comparaison pour trier les Categories par Id_Categorie
                 function compareId_Categorie($a, $b) {
