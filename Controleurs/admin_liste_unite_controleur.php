@@ -25,7 +25,7 @@ if (isset($_SESSION['Admin'])) {
                                         <tbody>';
 
                 // Récupération des données de la base de données
-                $Unites = Unite::getAllUnite();
+                $Unites = Unite::getAllUnite($Admin->getId_Entreprise());
 
                 // Fonction de comparaison pour trier les Unites par Id_Unite
                 function compareId_Unite($a, $b) {

@@ -6,17 +6,18 @@ class Categorie{
 
 
         public function __construct($Id_Categorie,$Nom_Categorie, $Genre){
-            $this->Id_Categorie=$Id_Categorie;
-            $this->Nom_Categorie=$Nom_Categorie;
-            $this->Genre=$Genre;
 
+            $this->Id_Categorie = $Id_Categorie;
+            $this->Nom_Categorie = $Nom_Categorie;
+            $this->Genre = $Genre;
         }
 
     //----------------------------------------------- Creer -----------------------------------------------
 
     public function createCategorie($Id_Admin) {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare('INSERT INTO Categorie (Nom_Categorie, Genre) VALUES (:Nom_Categorie, :Genre)');
+        $stmt = $bdd->prepare('INSERT INTO Categorie (Nom_Categorie, Genre) 
+                                VALUES (:Nom_Categorie, :Genre)');
         $stmt->bindParam(':Nom_Categorie', $this->Nom_Categorie, PDO::PARAM_STR);
         $stmt->bindParam(':Genre', $this->Genre, PDO::PARAM_STR);
         $stmt->execute();
@@ -25,7 +26,8 @@ class Categorie{
         $Id_Categorie = $bdd->lastInsertId();
     
         // Insérer dans la table Propose
-        $stmtPropose = $bdd->prepare('INSERT INTO Propose (Id_Admin, Id_Categorie) VALUES (:Id_Admin, :Id_Categorie)');
+        $stmtPropose = $bdd->prepare('INSERT INTO Propose (Id_Admin, Id_Categorie) 
+                                        VALUES (:Id_Admin, :Id_Categorie)');
         $stmtPropose->bindParam(':Id_Admin', $Id_Admin, PDO::PARAM_INT);
         $stmtPropose->bindParam(':Id_Categorie', $Id_Categorie, PDO::PARAM_INT);
         $stmtPropose->execute();

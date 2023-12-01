@@ -2,15 +2,15 @@
 
 if (isset($_SESSION['Admin'])) {
     
-    $Securiter = new Securiter();
-
     $Id_Admin = $_SESSION['Admin']->getId_Admin();
     $Admin = Admin::getInfoAdmin($Id_Admin);
     $droit = $Admin->getRole();
 
+    $Securiter = new Securiter();
+
     if ($droit == 1 || $droit == 2) {
 
-        if(!empty($_POST['Nom_Unite']) && !empty($_POST['Chiffre']) && !empty($_POST['Valeur'])){
+        if(!empty($_POST['Nom_Unite']) && !empty($_POST['Genre']) && !empty($_POST['Chiffre']) && !empty($_POST['Valeur'])){
 
             $Securiter->verifyCsrfToken($_POST['csrf_token']);
             
@@ -28,15 +28,15 @@ if (isset($_SESSION['Admin'])) {
             $Unite = new Unite(NULL, $Nom_Unite, $Genre, $Chiffre, $Valeur);
 
             // Vérifie si la Catégorie existe déjà
-            $Nom_UniteExiste = Unite::checkNomUniteExists($Nom_Unite);
+            $Nom_UniteExiste = Unite::checkNomUniteExists($Nom_Unite, $Admin->getId_Entreprise());
             
             echo "Résultat de Unite::checkNomUniteExists : ";
             var_dump($Nom_UniteExiste);
             
-            if(sizeof($Nom_UniteExiste) == 0) {
+            if(sizeof($Nom_UniteExiste) > 0) {
                 // Création de la Unité
                 echo "Création de la Unité...<br>";
-                $Unite->createUnite();
+                $Unite->createUnite($Id_Admin);
                 echo "Unité créée avec succès.<br>";
 
                 // Redirection vers la page d'accueil
