@@ -19,23 +19,21 @@ if (isset($_SESSION['Admin'])) {
             $Genre =  htmlspecialchars(trim(strip_tags($_POST['Genre'])));
 
             $bdd = bddconnexion::getInstance();
-            // Instanciation de la classe Categorie
+            // Crée un nouvel objet Categorie avec les paramètres donnés
             $Categorie = new Categorie(NULL, $Nom_Categorie, $Genre);
 
             // Vérifie si la Catégorie existe déjà
             $Nom_CategorieExiste = Categorie::checkNomCategorieExists($Nom_Categorie,$Admin->getId_Entreprise());
                         
-            if(sizeof($Nom_CategorieExiste) > 0) {
-                // Création de la Catégorie
-                echo "Création de la Catégorie...<br>";
+            if(empty($Nom_CategorieExiste)) {
                 $Categorie->createCategorie($Id_Admin);
-                echo "Catégorie créée avec succès.<br>";
-
                 // Redirection vers la page d'accueil
                 header('Location:./index.php?uc=admin_liste_categorie');
             } else {
-                echo "La Catégorie existe déjà.<br>";
+                // La Categorie existe déjà pour cette entreprise
+                echo "La Categorie existe déjà pour cette entreprise.<br>";
                 header('Location:./index.php?uc=admin_creer_categorie');
+                exit();
             }
         } else {
             $csrf_token = $Securiter->generateCsrfToken();
@@ -48,5 +46,4 @@ if (isset($_SESSION['Admin'])) {
 } else {
     header('Location:./index.php?uc=admin_connexion');
 }
-
 ?>

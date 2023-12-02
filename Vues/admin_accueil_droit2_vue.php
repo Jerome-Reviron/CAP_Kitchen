@@ -130,7 +130,7 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="./index.php?uc=admin_creer_ingredient">
+                    <a href="./index.php?uc=admin_liste_ingredient">
                         <i class="fa-solid fa-4 icon"></i>
                         <div class="link-content">
                             <span class="link-name">Je crée mes ingrédients</span>
@@ -139,7 +139,7 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="./index.php?uc=admin_creer_recette">
+                    <a href="./index.php?uc=admin_liste_recette">
                         <i class="fa-solid fa-5 icon"></i>
                         <div class="link-content">
                             <span class="link-name">Je crée mes recettes</span>
@@ -148,7 +148,7 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="./index.php?uc=admin_creer_fournisseur">
+                    <a href="./index.php?uc=admin_liste_fournisseur">
                         <i class="fa-solid fa-6 icon"></i>
                         <div class="link-content">
                             <span class="link-name">Je crée mes fournisseurs</span>

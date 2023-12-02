@@ -19,11 +19,12 @@ class Fournisseur{
         $this->Numero_SIRET = $Numero_SIRET;
     }
 
-    //----------------------------------------------------------------------Inscription--------------------------------------------------------------------------//
+    //----------------------------------------------------------------------Creer--------------------------------------------------------------------------//
 
     public function createFournisseur($Id_Admin) {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("INSERT INTO Fournisseur(Forme_Juridique, Nom_Fournisseur, Adresse, Telephone, Email, Numero_SIRET) VALUES(:Forme_Juridique, :Nom_Fournisseur, :Adresse, :Telephone, :Email, :Numero_SIRET)");
+        $stmt = $bdd->prepare("INSERT INTO Fournisseur(Forme_Juridique, Nom_Fournisseur, Adresse, Telephone, Email, Numero_SIRET) 
+                                VALUES(:Forme_Juridique, :Nom_Fournisseur, :Adresse, :Telephone, :Email, :Numero_SIRET)");
         $stmt->bindParam(':Forme_Juridique', $this->Forme_Juridique, PDO::PARAM_STR);
         $stmt->bindParam(':Nom_Fournisseur', $this->Nom_Fournisseur, PDO::PARAM_STR);
         $stmt->bindParam(':Adresse', $this->Adresse, PDO::PARAM_STR);
@@ -31,18 +32,19 @@ class Fournisseur{
         $stmt->bindParam(':Email', $this->Email, PDO::PARAM_STR);
         $stmt->bindParam(':Numero_SIRET', $this->Numero_SIRET, PDO::PARAM_STR);
         $stmt->execute();
-
+    
         // Récupérer l'ID de la catégorie nouvellement créée
         $Id_Fournisseur = $bdd->lastInsertId();
         
+        // $Id_Fournisseur est défini dans l'instance actuelle
+        $this->Id_Fournisseur = $Id_Fournisseur;
+    
         // Insérer dans la table Contacte
-        $stmtContacte = $bdd->prepare('INSERT INTO Contacte (Id_Admin, Id_Fournisseur) VALUES (:Id_Admin, :Id_Fournisseur)');
+        $stmtContacte = $bdd->prepare('INSERT INTO Contacte (Id_Admin, Id_Fournisseur) 
+                                        VALUES (:Id_Admin, :Id_Fournisseur)');
         $stmtContacte->bindParam(':Id_Admin', $Id_Admin, PDO::PARAM_INT);
         $stmtContacte->bindParam(':Id_Fournisseur', $Id_Fournisseur, PDO::PARAM_INT);
         $stmtContacte->execute();
-
-    // Si besoin de l'ID de la catégorie dans d'autres parties de votre code, le retour :
-    // return $Id_Categorie;;
     }
 
     //----------------------------------------------------------------------Vérifier--------------------------------------------------------------------------//
@@ -52,16 +54,17 @@ class Fournisseur{
                                                                 FROM Fournisseur F
                                                                 JOIN Contacte C ON F.Id_Fournisseur = C.Id_Fournisseur
                                                                 JOIN Admin A ON C.Id_Admin = A.Id_Admin
-                                                                WHERE F.Nom_Fournisseur = :Nom_Fournisseur AND A.Id_Entreprise != :Id_Entreprise");
+                                                                WHERE F.Nom_Fournisseur = :Nom_Fournisseur 
+                                                                AND A.Id_Entreprise = :Id_Entreprise");
         $stmt->bindParam(':Nom_Fournisseur', $Nom_Fournisseur, PDO::PARAM_STR);
         $stmt->bindParam(':Id_Entreprise', $Id_Entreprise, PDO::PARAM_INT);
         $stmt->execute();
         $data = $stmt->fetchAll();
-        $row = $stmt->rowCount();
         return $data;
     }
+    
 
-    //------------------------------------------------------------------------Selection-------------------------------------------------------------------------//
+    //------------------------------------------------------------------------Selectionner-------------------------------------------------------------------------//
     
     public static function getInfoFournisseur($Id) {
         $bdd = bddconnexion::getInstance()->getBdd();
@@ -95,13 +98,34 @@ class Fournisseur{
         $data = $stmt->fetchAll();
         $Fournisseurs = array();
         foreach ($data as $Fournisseurdata) {
-            $Fournisseur = new Fournisseur($Fournisseurdata['Id_Fournisseur'], $Fournisseurdata['Id_Fournisseur'], $Fournisseurdata['Forme_Juridique'], $Fournisseurdata['Nom_Fournisseur'], 
+            $Fournisseur = new Fournisseur($Fournisseurdata['Id_Fournisseur'], $Fournisseurdata['Forme_Juridique'], $Fournisseurdata['Nom_Fournisseur'], 
                                 $Fournisseurdata['Adresse'], $Fournisseurdata['Telephone'], $Fournisseurdata['Email'],
                                 $Fournisseurdata['Numero_SIRET']);
             
             array_push($Fournisseurs, $Fournisseur);
         }
         return $Fournisseurs;
+    }
+
+    //------------------------------------------------------------ Modifier ------------------------------------------------------------
+
+    public function postInfoFournisseur($Id, $Forme_Juridique, $Nom_Fournisseur, $Adresse, $Telephone, $Email, $Numero_SIRET) {
+        $bdd = bddconnexion::getInstance()->getBdd();
+
+        // Mise à jour de la table Fournisseur
+        $update = $bdd->prepare("UPDATE Fournisseur 
+                                SET Forme_Juridique = :Forme_Juridique, Nom_Fournisseur = :Nom_Fournisseur, 
+                                Adresse = :Adresse, Telephone = :Telephone, Email = :Email, Numero_SIRET = :Numero_SIRET
+                                WHERE Id_Fournisseur = :Id");
+        $update->bindParam(':Id', $Id, PDO::PARAM_INT);
+        $update->bindParam(':Forme_Juridique', $Forme_Juridique, PDO::PARAM_STR);
+        $update->bindParam(':Nom_Fournisseur', $Nom_Fournisseur, PDO::PARAM_STR);
+        $update->bindParam(':Adresse', $Adresse, PDO::PARAM_STR);
+        $update->bindParam(':Telephone', $Telephone, PDO::PARAM_STR);
+        $update->bindParam(':Email', $Email, PDO::PARAM_STR);
+        $update->bindParam(':Numero_SIRET', $Numero_SIRET, PDO::PARAM_STR);
+
+        $update->execute();
     }
 
     //----------------------------------------------- Supprimer -----------------------------------------------
@@ -124,26 +148,6 @@ class Fournisseur{
             error_log("Erreur lors de la suppression du Fournisseur : " . $e->getMessage());
             return false;
         }
-    }
-
-    //------------------------------------------------------------ Modifier ------------------------------------------------------------
-
-    public function postInfoFournisseur($Id, $Forme_Juridique, $Nom_Fournisseur, $Adresse, $Telephone, $Email, $Numero_SIRET) {
-        $bdd = bddconnexion::getInstance()->getBdd();
-
-        // Mise à jour de la table Fournisseur
-        $update = $bdd->prepare("UPDATE Fournisseur SET Forme_Juridique = :Forme_Juridique, Nom_Fournisseur = :Nom_Fournisseur, 
-                                            Adresse = :Adresse, Telephone = :Telephone, Email = :Email, Numero_SIRET = :Numero_SIRET
-                                            WHERE Id_Fournisseur = :Id");
-        $update->bindParam(':Id', $Id, PDO::PARAM_INT);
-        $update->bindParam(':Forme_Juridique', $Forme_Juridique, PDO::PARAM_STR);
-        $update->bindParam(':Nom_Fournisseur', $Nom_Fournisseur, PDO::PARAM_STR);
-        $update->bindParam(':Adresse', $Adresse, PDO::PARAM_STR);
-        $update->bindParam(':Telephone', $Telephone, PDO::PARAM_STR);
-        $update->bindParam(':Email', $Email, PDO::PARAM_STR);
-        $update->bindParam(':Numero_SIRET', $Numero_SIRET, PDO::PARAM_STR);
-
-        $update->execute();
     }
 
 

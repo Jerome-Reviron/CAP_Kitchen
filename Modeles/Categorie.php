@@ -24,6 +24,9 @@ class Categorie{
     
         // Récupérer l'ID de la catégorie nouvellement créée
         $Id_Categorie = $bdd->lastInsertId();
+
+        // $Id_Fournisseur est défini dans l'instance actuelle
+        $this->Id_Categorie = $Id_Categorie;
     
         // Insérer dans la table Propose
         $stmtPropose = $bdd->prepare('INSERT INTO Propose (Id_Admin, Id_Categorie) 
@@ -31,9 +34,6 @@ class Categorie{
         $stmtPropose->bindParam(':Id_Admin', $Id_Admin, PDO::PARAM_INT);
         $stmtPropose->bindParam(':Id_Categorie', $Id_Categorie, PDO::PARAM_INT);
         $stmtPropose->execute();
-    
-        // Si besoin de l'ID de la catégorie dans d'autres parties de votre code, le retour :
-        // return $Id_Categorie;
     }
     
     //----------------------------------------------- Vérifier -----------------------------------------------
@@ -43,7 +43,8 @@ class Categorie{
                                                                 FROM Categorie C
                                                                 JOIN Propose P ON C.Id_Categorie = P.Id_Categorie
                                                                 JOIN Admin A ON P.Id_Admin = A.Id_Admin
-                                                                WHERE Nom_Categorie = :Nom_Categorie AND A.Id_Entreprise != :Id_Entreprise");
+                                                                WHERE C.Nom_Categorie = :Nom_Categorie 
+                                                                AND A.Id_Entreprise = :Id_Entreprise");
         $stmt->bindParam(':Nom_Categorie', $Nom_Categorie, PDO::PARAM_STR);
         $stmt->bindParam(':Id_Entreprise', $Id_Entreprise, PDO::PARAM_INT);
         $stmt->execute();
@@ -56,7 +57,8 @@ class Categorie{
     
     public static function getInfoCategorie($Id) {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("SELECT * FROM Categorie WHERE Id_Categorie = :Id");
+        $stmt = $bdd->prepare("SELECT * FROM Categorie 
+                                WHERE Id_Categorie = :Id");
     
         // Utilisation de bindParam pour lier la valeur de la variable $Id au paramètre :Id
         $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
@@ -68,43 +70,42 @@ class Categorie{
         $Categorie = new Categorie($data['Id_Categorie'], $data['Nom_Categorie'], $data['Genre']);
         return $Categorie;
     }
-    
-    
+
+    //----------------------------------------------- Object -----------------------------------------------
+
+    public static function getAllCategorie($IdEntrepriseSession) {
+        $bdd = bddconnexion::getInstance()->getBdd();
+        $stmt = $bdd->prepare("SELECT C.* 
+                                FROM Categorie C
+                                JOIN Propose P ON C.Id_Categorie = P.Id_Categorie
+                                JOIN Admin A ON P.Id_Admin = A.Id_Admin
+                                WHERE A.Id_Entreprise = :Id_Entreprise");
+        $stmt->bindParam(':Id_Entreprise', $IdEntrepriseSession, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetchAll();
+        $Categories = array();
+        foreach ($data as $CategorieData) {
+            $Categorie = new Categorie($CategorieData['Id_Categorie'], 
+                            $CategorieData['Nom_Categorie'], $CategorieData['Genre']);
+
+            array_push($Categories, $Categorie);
+        }
+        return $Categories;
+    }
 
     //----------------------------------------------- Modifier -----------------------------------------------
     
     public function postInfoCategorie($Id, $Nom_Categorie, $Genre) {
         $bdd = bddconnexion::getInstance()->getBdd();
-        $update = $bdd->prepare("UPDATE Categorie SET Nom_Categorie = :Nom_Categorie, Genre = :Genre WHERE Id_Categorie = :Id");
-    
-        // Utilisation de bindParam pour lier les valeurs des variables aux paramètres de la requête préparée
-        $update->bindParam(':Id', $Id, PDO::PARAM_INT);
+        $update = $bdd->prepare("UPDATE Categorie 
+                                SET Nom_Categorie = :Nom_Categorie, Genre = :Genre 
+                                WHERE Id_Categorie = :Id");
+            $update->bindParam(':Id', $Id, PDO::PARAM_INT);
         $update->bindParam(':Nom_Categorie', $Nom_Categorie, PDO::PARAM_STR);
         $update->bindParam(':Genre', $Genre, PDO::PARAM_STR);
     
         $update->execute();
     }
-
-    //----------------------------------------------- Object -----------------------------------------------
-
-    public static function getAllCategorie($IdEntrepriseSession) {
-    $bdd = bddconnexion::getInstance()->getBdd();
-    $stmt = $bdd->prepare("SELECT C.* 
-                            FROM Categorie C
-                            JOIN Propose P ON C.Id_Categorie = P.Id_Categorie
-                            JOIN Admin A ON P.Id_Admin = A.Id_Admin
-                            WHERE A.Id_Entreprise = :Id_Entreprise");
-    $stmt->bindParam(':Id_Entreprise', $IdEntrepriseSession, PDO::PARAM_INT);
-    $stmt->execute();
-    $data = $stmt->fetchAll();
-    $Categories = array();
-    foreach ($data as $CategorieData) {
-        $Categorie = new Categorie($CategorieData['Id_Categorie'], $CategorieData['Nom_Categorie'], $CategorieData['Genre']);
-        array_push($Categories, $Categorie);
-    }
-    return $Categories;
-}
-
     
     //----------------------------------------------- Supprimer -----------------------------------------------
     public function deleteCategorieById() {
@@ -194,7 +195,6 @@ class Categorie{
 
         return $this;
     }
-
 
 }
 ?>

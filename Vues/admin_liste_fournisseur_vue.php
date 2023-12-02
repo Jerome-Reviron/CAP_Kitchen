@@ -1,5 +1,4 @@
 <tr>
-    <td class="bossu"><?php echo $Fournisseur->getId_Fournisseur() ?></td>
     <td class="bossu"><?php echo $Fournisseur->getForme_Juridique() ?></td>
     <td class="bossu"><?php echo $Fournisseur->getNom_Fournisseur() ?></td>
     <td class="bossu"><?php echo $Fournisseur->getAdresse() ?></td>

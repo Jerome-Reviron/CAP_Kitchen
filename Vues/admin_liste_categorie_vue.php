@@ -1,5 +1,4 @@
 <tr>
-    <td class="bossu"><?php echo $Categorie->getId_Categorie() ?></td>
     <td class="bossu"><?php echo $Categorie->getNom_Categorie() ?></td>
     <td class="bossu"><?php echo $Categorie->getGenre() ?></td>
 

@@ -8,11 +8,11 @@ class Unite{
 
     public function __construct($Id_Unite, $Nom_Unite, $Genre, $Chiffre, $Valeur){
 
-        $this->Id_Unite = $Id_Unite;
         $this->Nom_Unite = $Nom_Unite;
         $this->Genre = $Genre;
         $this->Chiffre = $Chiffre;
         $this->Valeur = $Valeur;
+        $this->Id_Unite = $Id_Unite;
     }
 
     
@@ -31,24 +31,25 @@ class Unite{
         // Récupérer l'ID de la catégorie nouvellement créée
         $Id_Unite = $bdd->lastInsertId();
     
-        // Insérer dans la table Cree
-        $stmtCree = $bdd->prepare('INSERT INTO Cree (Id_Admin, Id_Unite) 
-                                        VALUES (:Id_Admin, :Id_Unite)');
-        $stmtCree->bindParam(':Id_Admin', $Id_Admin, PDO::PARAM_INT);
-        $stmtCree->bindParam(':Id_Unite', $Id_Unite, PDO::PARAM_INT);
-        $stmtCree->execute();
+        // $Id_Unite est défini dans l'instance actuelle
+        $this->Id_Unite = $Id_Unite;
     
-        // Si besoin de l'ID de la catégorie dans d'autres parties de votre code, le retour :
-        // return $Id_Unite;
+        // Insérer dans la table Contacte
+        $stmtContacte = $bdd->prepare('INSERT INTO Contacte (Id_Admin, Id_Unite) 
+                                        VALUES (:Id_Admin, :Id_Unite)');
+        $stmtContacte->bindParam(':Id_Admin', $Id_Admin, PDO::PARAM_INT);
+        $stmtContacte->bindParam(':Id_Unite', $Id_Unite, PDO::PARAM_INT);
+        $stmtContacte->execute();
     }
     //----------------------------------------------- Vérifier -----------------------------------------------
 
     public static function checkNomUniteExists($Nom_Unite, $Id_Entreprise) {
-        $stmt = bddconnexion::getInstance()->getBdd()->prepare("SELECT U.* 
+        $stmt = bddconnexion::getInstance()->getBdd()->prepare("SELECT U.*
                                                                 FROM Unite U
                                                                 JOIN Cree C ON U.Id_Unite = C.Id_Unite
                                                                 JOIN Admin A ON C.Id_Admin = A.Id_Admin
-                                                                WHERE Nom_Unite = :Nom_Unite AND A.Id_Entreprise != :Id_Entreprise");
+                                                                WHERE U.Nom_Unite = :Nom_Unite 
+                                                                AND A.Id_Entreprise = :Id_Entreprise");
         $stmt->bindParam(':Nom_Unite', $Nom_Unite, PDO::PARAM_STR);
         $stmt->bindParam(':Id_Entreprise', $Id_Entreprise, PDO::PARAM_INT);
         $stmt->execute();
@@ -73,8 +74,26 @@ class Unite{
         $Unite = new Unite($data['Id_Unite'], $data['Nom_Unite'], $data['Genre'],  $data['Chiffre'], $data['Valeur']);
         return $Unite;
     }
-    
-    
+
+    //----------------------------------------------- Object -----------------------------------------------//
+
+    public static function getAllUnite($IdEntrepriseSession) {
+        $bdd = bddconnexion::getInstance()->getBdd();
+        $stmt = $bdd->prepare("SELECT U.*
+                                FROM Unite U
+                                JOIN Cree C ON U.Id_Unite = C.Id_Unite
+                                JOIN Admin A ON C.Id_Admin = A.Id_Admin
+                                WHERE A.Id_Entreprise = :Id_Entreprise");
+        $stmt->bindParam(':Id_Entreprise', $IdEntrepriseSession, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetchAll();
+        $Unites = array();
+        foreach ($data as $UniteData) {
+            $Unite = new Unite($UniteData['Id_Unite'], $UniteData['Nom_Unite'], $UniteData['Genre'], $UniteData['Chiffre'], $UniteData['Valeur']);
+            array_push($Unites, $Unite);
+        }
+        return $Unites;
+    }
 
     //----------------------------------------------- Modifier -----------------------------------------------
     
@@ -91,27 +110,6 @@ class Unite{
     
         $update->execute();
     }
-
-    //----------------------------------------------- Object -----------------------------------------------//
-
-    public static function getAllUnite($IdEntrepriseSession) {
-        $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("SELECT U.* 
-                                FROM Unite U
-                                JOIN Cree C ON U.Id_Unite = C.Id_Unite
-                                JOIN Admin A ON C.Id_Admin = A.Id_Admin
-                                WHERE A.Id_Entreprise = :Id_Entreprise");
-        $stmt->bindParam(':Id_Entreprise', $IdEntrepriseSession, PDO::PARAM_INT);
-        $stmt->execute();
-        $data = $stmt->fetchAll();
-        $Unites = array();
-        foreach ($data as $UniteData) {
-            $Unite = new Unite($UniteData['Id_Unite'], $UniteData['Nom_Unite'], $UniteData['Genre'], $UniteData['Chiffre'], $UniteData['Valeur']);
-            array_push($Unites, $Unite);
-        }
-        return $Unites;
-    }
-    
     //----------------------------------------------- Supprimer -----------------------------------------------//
 
     public function deleteUniteById() {

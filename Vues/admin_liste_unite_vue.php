@@ -1,5 +1,4 @@
 <tr>
-    <td class="bossu"><?php echo $Unite->getId_Unite() ?></td>
     <td class="bossu"><?php echo $Unite->getNom_Unite() ?></td>
     <td class="bossu"><?php echo $Unite->getGenre() ?></td>
     <td class="bossu"><?php echo $Unite->getChiffre() ?></td>

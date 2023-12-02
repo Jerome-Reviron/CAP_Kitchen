@@ -1,5 +1,6 @@
 <?php
 if (isset($_SESSION['Admin'])) {
+
         $Id_Admin = $_SESSION['Admin']->getId_Admin(); 
         $Admin = Admin::getInfoAdmin($Id_Admin);
         $droit = $Admin->getRole();
@@ -13,7 +14,6 @@ if (isset($_SESSION['Admin'])) {
                                 <table id="myTable">
                                         <thead>
                                                 <tr>
-                                                        <th class="sortable">Id Fournisseur</th>
                                                         <th class="sortable">Forme Juridique</th>
                                                         <th class="sortable">Nom</th>
                                                         <th class="sortable">Adresse</th>

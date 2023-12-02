@@ -1,5 +1,6 @@
 <?php
 if (isset($_SESSION['Admin'])) {
+
     $Id_Admin = $_SESSION['Admin']->getId_Admin();
     $Admin = Admin::getInfoAdmin($Id_Admin);
     $droit = $Admin->getRole();
@@ -8,11 +9,10 @@ if (isset($_SESSION['Admin'])) {
 
     if ($droit == 1 || $droit == 2) {
 
-        // Si les variables existent et qu'elles ne sont pas vides
         if(!empty($_POST['Forme_Juridique']) && !empty($_POST['Nom_Fournisseur'])
         && !empty($_POST['Adresse']) && !empty($_POST['Telephone'])
-        && !empty($_POST['Email']) && !empty($_POST['Numero_SIRET']))
-        {   
+        && !empty($_POST['Email']) && !empty($_POST['Numero_SIRET'])){   
+
             $Securiter->verifyCsrfToken($_POST['csrf_token']);
 
             // Patch XSS
@@ -35,18 +35,16 @@ if (isset($_SESSION['Admin'])) {
 
                             // Vérifie si la Fournisseur existe déjà
                             $Nom_FournisseurExiste = Fournisseur::checkNomFournisseurExists($Nom_Fournisseur, $Admin->getId_Entreprise());
-                                        
-                            if(sizeof($Nom_FournisseurExiste) > 0) {
-                                // Création de la Fournisseur
-                                echo "Création de la Fournisseur...<br>";
-                                $Fournisseur->createFournisseur($Id_Admin);
-                                echo "Fournisseur créée avec succès.<br>";
 
+                            if (empty($Nom_FournisseurExiste)) {
+                                $Fournisseur->createFournisseur($Id_Admin);
                                 // Redirection vers la page d'accueil
                                 header('Location:./index.php?uc=admin_liste_fournisseur');
                             } else {
-                                echo "Le Fournisseur existe déjà.<br>";
+                                // Le Fournisseur existe déjà pour cette entreprise
+                                echo "Le Fournisseur existe déjà pour cette entreprise.<br>";
                                 header('Location:./index.php?uc=admin_creer_fournisseur');
+                                exit();
                             }
                         }else{ 
                             header('Location: index.php?uc=admin_creer_fournisseur&reg_err=adresse_length'); 
