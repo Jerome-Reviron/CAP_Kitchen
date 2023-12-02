@@ -29,7 +29,7 @@ if (isset($_SESSION['Admin'])) {
 
             // Vérifie si la Catégorie existe déjà
             $Nom_UniteExiste = Unite::checkNomUniteExists($Nom_Unite, $Admin->getId_Entreprise());
-            
+                        
             if (empty($Nom_UniteExiste)) {
                 $Unite->createUnite($Id_Admin);
                 // Redirection vers la page d'accueil

@@ -34,12 +34,12 @@ class Unite{
         // $Id_Unite est défini dans l'instance actuelle
         $this->Id_Unite = $Id_Unite;
     
-        // Insérer dans la table Contacte
-        $stmtContacte = $bdd->prepare('INSERT INTO Contacte (Id_Admin, Id_Unite) 
+        // Insérer dans la table Cree
+        $stmtCree = $bdd->prepare('INSERT INTO Cree (Id_Admin, Id_Unite) 
                                         VALUES (:Id_Admin, :Id_Unite)');
-        $stmtContacte->bindParam(':Id_Admin', $Id_Admin, PDO::PARAM_INT);
-        $stmtContacte->bindParam(':Id_Unite', $Id_Unite, PDO::PARAM_INT);
-        $stmtContacte->execute();
+        $stmtCree->bindParam(':Id_Admin', $Id_Admin, PDO::PARAM_INT);
+        $stmtCree->bindParam(':Id_Unite', $Id_Unite, PDO::PARAM_INT);
+        $stmtCree->execute();
     }
     //----------------------------------------------- Vérifier -----------------------------------------------
 
