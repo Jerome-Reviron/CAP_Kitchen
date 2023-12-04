@@ -13,7 +13,6 @@ if (isset($_SESSION['Admin'])) {
                         <table id="myTable">
                         <thead>
                                 <tr>
-                                <th class="sortable">Id Admin</th>
                                 <th class="sortable">Nom</th>
                                 <th class="sortable">Prénom</th>
                                 <th class="sortable">Pseudo</th>

@@ -1,5 +1,4 @@
 <tr>
-    <td class="bossu"><?php echo $Admin->getId_Admin() ?></td>
     <td class="bossu"><?php echo $Admin->getNom() ?></td>
     <td class="bossu"><?php echo $Admin->getPrenom() ?></td>
     <td class="bossu"><?php echo $Admin->getPseudo() ?></td>
