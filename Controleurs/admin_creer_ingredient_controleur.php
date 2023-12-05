@@ -8,10 +8,10 @@ if (isset($_SESSION['Admin'])) {
     $Admin = Admin::getInfoAdmin($Id_Admin);
     $droit = $Admin->getRole();
 
-    if ($droit == 1 || $droit == 2) {
+    if ($droit == 1 || $droit == 2 || $droit == 3 || $droit == 4) {
 
         // Appeler la fonction pour récupérer la liste des unités
-        $liste_unites = Unite::getAllUnite();
+        $liste_unites = Unite::getAllUnite($Admin->getId_Entreprise());
 
         if(!empty($_POST['Nom_Ingredient']) && !empty($_POST['Unite_recette'])
         && !empty($_POST['Conditionnement_achat']) && !empty($_POST['Prix_achat']) && !empty($_POST['Unite_achat'])){

@@ -4,7 +4,7 @@ if (isset($_SESSION['Admin'])) {
         $Admin = Admin::getInfoAdmin($Id_Admin);
         $droit = $Admin->getRole();
 
-        if ($droit == 1 || $droit == 2) {
+        if ($droit == 1 || $droit == 2 || $droit == 3 || $droit == 4) {
 
                 echo '
                 <div class="liste_admin">
@@ -13,7 +13,6 @@ if (isset($_SESSION['Admin'])) {
                                 <table id="myTable">
                                         <thead>
                                                 <tr>
-                                                        <th class="sortable">Id Ingredient</th>
                                                         <th class="sortable">Nom</th>
                                                         <th class="sortable">Photo</th>
                                                         <th class="sortable">Unite de recette</th>

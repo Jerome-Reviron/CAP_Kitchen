@@ -7,7 +7,7 @@ if (isset($_SESSION['Admin'])) {
     $Admin = Admin::getInfoAdmin($Id_Admin);
     $droit = $Admin->getRole();
 
-    if ($droit == 1 || $droit == 2) {
+    if ($droit == 1 || $droit == 2 || $droit == 3 || $droit == 4) {
 
         if (isset($_GET['Id'])) {
             $Id = htmlspecialchars($_GET['Id']);

@@ -19,6 +19,8 @@ if (isset($_SESSION['Admin'])) {
         include "./Vues/admin_accueil_droit2_vue.php";
     } elseif ($droit == 3) {
         include "./Vues/admin_accueil_droit3_vue.php";
+    } elseif ($droit == 4) {
+        include "./Vues/admin_accueil_droit4_vue.php";
     }
 } else {
     header('Location:./index.php?uc=admin_connexion');

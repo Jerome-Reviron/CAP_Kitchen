@@ -746,7 +746,8 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     color: rgba(187, 187, 187, 0.8);
 }
 
-.Panel_boss_inscription .Administrateur .form .inputBox .Id_E{
+.Panel_boss_inscription .Administrateur .form .inputBox .Id_E,
+.Panel_boss_inscription .Administrateur .form .inputBox .Id_R{
     display: none;
 }
 
@@ -754,6 +755,8 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
 .Panel_boss_inscription .Administrateur .form .inputBox input:focus ~ span,
 .Panel_boss_inscription .Administrateur .form .inputBox input:valid ~ .Id_E,
 .Panel_boss_inscription .Administrateur .form .inputBox input:focus ~ .Id_E,
+.Panel_boss_inscription .Administrateur .form .inputBox input:valid ~ .Id_R,
+.Panel_boss_inscription .Administrateur .form .inputBox input:focus ~ .Id_R,
 .Panel_boss_inscription .Administrateur .form .inputBox select:valid ~ span,
 .Panel_boss_inscription .Administrateur .form .inputBox select:focus ~ span{
     display:block;

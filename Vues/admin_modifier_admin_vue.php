@@ -43,13 +43,17 @@
                 <span>Email</span>
             </div>
             <div class="inputBox">
-                <select name="Role" required="required">
-                    <option value="1" <?php echo ($Admin->getRole() == 1) ? 'selected' : ''; ?>>Boss</option>
-                    <option value="2" <?php echo ($Admin->getRole() == 2) ? 'selected' : ''; ?>>Employé</option>
-                    <option value="3" <?php echo ($Admin->getRole() == 3) ? 'selected' : ''; ?>>Stagiaire</option>
+                <select name="Role" required="required" readonly>
+                    <?php
+                        foreach ($optionsRoles as $value => $label) {
+                            echo "<option value=\"$value\"";
+                            echo ($Admin->getRole() == $value) ? ' selected' : '';
+                            echo ">$label</option>";
+                        }
+                    ?>
                 </select>       
                 <i class="fa-solid fa-check"></i>        
-                <span>Role</span>
+                <span class="Id_R">Role</span>
             </div>
             <div class="inputBox">
                 <input type="number" name="Id_Entreprise" value="<?php echo ($Admin->getId_Entreprise()); ?>" required="required" autocomplete="off" readonly>       

@@ -7,6 +7,13 @@ if (isset($_SESSION['Admin'])) {
 
     $Securiter = new Securiter();
 
+    // Définissez les options du rôle dans un tableau associatif
+    $optionsRoles = [
+        2 => 'Responsable',
+        3 => 'Employé',
+        4 => 'Stagiaire',
+    ];
+
     if ($droit == 1) {
 
         // Si les variables existent et qu'elles ne sont pas vides

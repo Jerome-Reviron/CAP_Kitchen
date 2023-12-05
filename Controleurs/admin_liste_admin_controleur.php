@@ -4,7 +4,7 @@ if (isset($_SESSION['Admin'])) {
         $Admin = Admin::getInfoAdmin($Id_Admin);
         $droit = $Admin->getRole();
 
-        if ($droit == 1) {
+        if ($droit == 1 || $droit == 2) {
 
                 echo '
                 <div class="liste_admin">
@@ -39,7 +39,7 @@ if (isset($_SESSION['Admin'])) {
                 // Tri des Admins par Id_Admin
                 usort($Admins, 'compareId_Admin');
 
-                // Utilisez une boucle foreach pour inclure le fichier 'admin_liste_Admin.php'
+                // Utilisez une boucle foreach pour inclure le fichier 'admin_liste_admin_vue.php'
                 foreach ($Admins as $Admin) {                        
                         include './Vues/admin_liste_admin_vue.php';
                 }
@@ -47,9 +47,14 @@ if (isset($_SESSION['Admin'])) {
                 echo '                 
                         </tbody>
                         </table>
-                        <p>
-                                <a class="top-rectangle-button" href="./index.php?uc=admin_inscription">Créer</a>
-                                <a class="top-rectangle-button" href="./index.php?uc=admin_accueil">Retour</a>
+                        <p>';
+        
+                                // Condition pour afficher le bouton "Créer" seulement si le droit est égal à 1
+                                if ($droit == 1) {
+                                        echo '<a class="top-rectangle-button" href="./index.php?uc=admin_inscription">Créer</a>';
+                                }
+                        
+                                echo '<a class="top-rectangle-button" href="./index.php?uc=admin_accueil">Retour</a>
                         </p>
                 </form>
                 </div>';

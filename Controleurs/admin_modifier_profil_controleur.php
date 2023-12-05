@@ -3,7 +3,15 @@ if (isset($_SESSION['Admin'])) {
     $Id_Admin = $_SESSION['Admin']->getId_Admin(); 
     $Admin = Admin::getInfoAdmin($Id_Admin);
     $droit = $Admin->getRole();
-    if ($droit == 1) {
+
+    $optionsRoles = [
+        1 => 'Boss',
+        2 => 'Responsable',
+        3 => 'Employé',
+        4 => 'Stagiaire',
+    ];
+
+    if ($droit == 1  || $droit == 2 || $droit == 3 || $droit == 4) {
 
         $Securiter = new Securiter();
 
@@ -15,11 +23,10 @@ if (isset($_SESSION['Admin'])) {
            // Si les variables existent et qu'elles ne sont pas vides
             if(!empty($_POST['Nom']) && !empty($_POST['Prenom']) && !empty($_POST['Pseudo'])
             && !empty($_POST['Password']) && !empty($_POST['Password_retype']) && !empty($_POST['Adresse']) && !empty($_POST['Telephone']) 
-            && !empty($_POST['Email']) && !empty($_POST['Role']) && !empty($_POST['Id_Entreprise']))
-            {   
+            && !empty($_POST['Email']) && !empty($_POST['Role']) && !empty($_POST['Id_Entreprise'])){   
             
                 $Securiter->verifyCsrfToken($_POST['csrf_token']);
-                
+
                 // Patch XSS
                 $Nom =  htmlspecialchars(trim(strip_tags($_POST['Nom'])));
                 $Prenom =htmlspecialchars(trim(strip_tags($_POST['Prenom'])));
@@ -97,5 +104,3 @@ if (isset($_SESSION['Admin'])) {
 ?>
 <script type="text/javascript" src="./Vues/JS/admin_modif.js"></script>
 <script type="text/javascript" src="./Vues/JS/geomotif.js"></script>
-
-

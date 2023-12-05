@@ -112,17 +112,8 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="./index.php?uc=admin_liste_categorie">
-                        <i class="fa-solid fa-2 icon"></i>
-                        <div class="link-content">
-                            <span class="link-name">Je crée mes catégories</span>
-                            <p>Pour classer mes ingredients et recettes.</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-link">
                     <a href="./index.php?uc=admin_liste_ingredient">
-                        <i class="fa-solid fa-3 icon"></i>
+                        <i class="fa-solid fa-2 icon"></i>
                         <div class="link-content">
                             <span class="link-name">Je crée mes ingrédients</span>
                             <p>Pour remplir ma mercuriale.</p>
@@ -131,7 +122,7 @@
                 </li>
                 <li class="nav-link">
                     <a href="./index.php?uc=admin_liste_recette">
-                        <i class="fa-solid fa-4 icon"></i>
+                        <i class="fa-solid fa-3 icon"></i>
                         <div class="link-content">
                             <span class="link-name">Je crée mes recettes</span>
                             <p>Pour partager mes connaissances.</p>

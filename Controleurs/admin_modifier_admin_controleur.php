@@ -3,7 +3,15 @@ if (isset($_SESSION['Admin'])) {
     $Id_Admin = $_SESSION['Admin']->getId_Admin(); 
     $Admin = Admin::getInfoAdmin($Id_Admin);
     $droit = $Admin->getRole();
-    if ($droit == 1) {
+
+    $optionsRoles = [
+        1 => 'Boss',
+        2 => 'Responsable',
+        3 => 'Employé',
+        4 => 'Stagiaire',
+    ];
+    
+    if ($droit == 1 || $droit == 2) {
 
         $Securiter = new Securiter();
 

@@ -44,9 +44,12 @@
             </div>
             <div class="inputBox">
                 <select name="Role" required="required">
-                    <option value="1">Boss</option>
-                    <option value="2">Employé</option>
-                    <option value="3">Stagiaire</option>
+                    <?php
+                        // Utilisez une boucle foreach pour générer les options
+                        foreach ($optionsRoles as $value => $label) {
+                            echo "<option value=\"$value\">$label</option>";
+                        }
+                    ?>
                 </select>
                 <i class="fa-solid fa-check"></i>        
                 <span>Role</span>
