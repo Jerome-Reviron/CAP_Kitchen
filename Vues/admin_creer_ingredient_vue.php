@@ -10,7 +10,7 @@
             <div class="inputBox">
                 <input type="file" name="Photo" accept="image/*" required="required">
                 <i class="fa-solid fa-hashtag"></i>
-                <span>Photo</span>
+                <span class="Phantome">Photo</span>
             </div>
             <div class="inputBox">
                 <input type="text" name="Unite_recette" required="required" autocomplete="off">

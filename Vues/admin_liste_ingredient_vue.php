@@ -7,7 +7,7 @@
     <td class="bossu"><?php echo $Ingredient->getUnite_achat() ?></td>
 
     <?php if ($droit == 1 || $droit == 2 || $droit == 3) {
-        echo '<td class="bossu"><a href="index.php?uc=admin_modifier_ingredient&Id=<?php echo $Admin->getId_Ingredient() ?>"><img src="./Vues/Image/refresh.svg"></a></td>';
+        echo '<td class="bossu"><a href="index.php?uc=admin_modifier_ingredient&Id=' . $Ingredient->getId_Ingredient() . '"><img src="./Vues/Image/refresh.svg"></a></td>';
         } else {
             echo '<td class="bossu">Non autorisé</td>';
         }

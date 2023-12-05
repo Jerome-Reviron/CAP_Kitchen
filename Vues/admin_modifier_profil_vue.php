@@ -58,12 +58,12 @@
                     ?>
                 </select>       
                 <i class="fa-solid fa-check"></i>        
-                <span class="Id_R">Role</span>
+                <span class="Phantome">Role</span>
             </div>
             <div class="inputBox">
                 <input type="number" name="Id_Entreprise" value="<?php echo ($Admin->getId_Entreprise()); ?>" required="required" autocomplete="off" readonly>       
                 <i class="fa-solid fa-id-card-clip"></i>      
-                <span class="Id_E">Id_Entreprise</span>
+                <span class="Phantome">Id_Entreprise</span>
             </div>          
             <div class="inputBox">
                 <input type="submit" value="Modifier">
