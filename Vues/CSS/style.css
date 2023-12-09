@@ -800,6 +800,7 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
 .Panel_boss_inscription .optionsConditionnement_achatsDiv,
 .Panel_boss_inscription .optionsUnite_achatsDiv,
 .Panel_boss_inscription .optionsAllergenesDiv,
+.Panel_boss_inscription .optionsCategoriesDiv,
 .Panel_boss_inscription .optionsFournisseursDiv {
     display: none;
     position: absolute;
@@ -818,6 +819,7 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
 .Panel_boss_inscription .optionsConditionnement_achatsDiv .scrollable-container,
 .Panel_boss_inscription .optionsUnite_achatsDiv .scrollable-container,
 .Panel_boss_inscription .optionsAllergenesDiv .scrollable-container,
+.Panel_boss_inscription .optionsCategoriesDiv .scrollable-container,
 .Panel_boss_inscription .optionsFournisseursDiv .scrollable-container {
     max-height: 120px;
     overflow-y: auto;
@@ -839,6 +841,7 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
 .Panel_boss_inscription .optionsConditionnement_achatsDiv .Conditionnement_achatsButton,
 .Panel_boss_inscription .optionsUnite_achatsDiv .Unite_achatsButton,
 .Panel_boss_inscription .optionsAllergenesDiv .AllergenesButton,
+.Panel_boss_inscription .optionsCategoriesDiv .CategoriesButton,
 .Panel_boss_inscription .optionsFournisseursDiv .FournisseursButton {
     justify-content: baseline;
     align-items: center;

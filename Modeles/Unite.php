@@ -140,7 +140,7 @@ class Unite{
         return $Genres;
     }    
     
-    //---------------------------------- Récupérer toutes les Valeurs distinctes ---------------------------------//
+    //---------------------------------- Récupérer toutes les Unite_recettes distinctes ---------------------------------//
 
     public static function getUnite_recettesFromDatabase() {
         $bdd = bddconnexion::getInstance()->getBdd();

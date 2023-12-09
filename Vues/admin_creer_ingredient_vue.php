@@ -38,6 +38,11 @@
                 <span>Allergene</span>
             </div>
             <div class="inputBox">
+                <input type="text" name="Categorie" required="required" autocomplete="off">
+                <i class="fa-solid fa-hashtag"></i>
+                <span>Categorie</span>
+            </div>
+            <div class="inputBox">
                 <input type="text" name="Fournisseur" required="required" autocomplete="off">
                 <i class="fa-solid fa-hashtag"></i>
                 <span>Fournisseur</span>
@@ -106,6 +111,21 @@
             ?>
         </div>
         <button id="AllergenesButton" class="AllergenesButton">Valider</button>
+    </div>
+    <div id="optionsCategoriesDiv" class="optionsCategoriesDiv">
+        <div class="scrollable-container">
+            <?php
+            // Récupérer les Categories depuis la base de données
+            $Categories = Categorie::getCategoriesFromDatabase();
+
+            // Parcourir les Categories pour les afficher comme boutons radio
+            foreach ($Categories as $Categorie) {
+                $Nom_Categorie = $Categorie['Nom_Categorie'];
+                echo "<label><input type='radio' name='Categories[]' value='{$Categorie['Id_Categorie']}'> {$Nom_Categorie}</label><br>";
+            }            
+            ?>
+        </div>
+        <button id="CategoriesButton" class="CategoriesButton">Valider</button>
     </div>
     <div id="optionsFournisseursDiv" class="optionsFournisseursDiv">
         <div class="scrollable-container">

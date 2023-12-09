@@ -136,6 +136,16 @@ class Categorie{
         return $Genres;
     }   
 
+    //---------------------------------- Récupérer toutes les Unite_recettes distinctes ---------------------------------//
+
+    public static function getCategoriesFromDatabase() {
+        $bdd = bddconnexion::getInstance()->getBdd();
+        $stmt = $bdd->prepare("SELECT DISTINCT Id_Categorie, Nom_Categorie FROM Categorie Where Genre = 'Ingrédient'"); 
+        $stmt->execute();
+        $Categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $Categories;
+    }
+
     /**
      * Get the value of Id_Categorie
      */ 

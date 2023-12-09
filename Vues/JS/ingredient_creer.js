@@ -171,6 +171,52 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+/*---------------------------------------------------------------------------Categorie-----------------------------------------------------------------------------*/ 
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Récupérer l'input Categorie
+    var CategorieInput = document.querySelector('input[name="Categorie"]');
+    
+    // Récupérer la div d'options
+    var optionsCategoriesDiv = document.getElementById('optionsCategoriesDiv');
+
+    // Récupérer le bouton de Categories
+    var CategoriesButton = document.getElementById('CategoriesButton');
+
+    // Ajouter un écouteur d'événements sur le focus de l'input Categorie
+    CategorieInput.addEventListener('focus', function () {
+        // Afficher la div d'options
+        optionsCategoriesDiv.style.display = 'block';
+    });
+
+    // Ajouter un écouteur d'événements sur le bouton de Categories
+    CategoriesButton.addEventListener('click', function () {
+        // Récupérer toutes les cases à cocher cochées
+        var checkedCheckboxes = document.querySelectorAll('input[name="Categories[]"]:checked');
+        
+        // Construire une chaîne avec les Categories des cases à cocher séparées par "/"
+        var selectedValues = Array.from(checkedCheckboxes).map(function (checkbox) {
+            return checkbox.value;
+        }).join(" / ");
+
+        // Mettre à jour l'input Categorie avec les Categories sélectionnées
+        CategorieInput.value = selectedValues;
+
+        // Masquer la div d'options
+        optionsCategoriesDiv.style.display = 'none';
+    });
+
+    // Ajouter un écouteur d'événements sur le clic du document
+    document.addEventListener('click', function (event) {
+        // Vérifier si l'événement de clic provient de la div optionsCategoriesDiv ou de l'input Categorie
+        if (!optionsCategoriesDiv.contains(event.target) && event.target !== CategorieInput) {
+            // Masquer la div d'options lorsque l'utilisateur clique en dehors de la div
+            optionsCategoriesDiv.style.display = 'none';
+        }
+    });
+});
+
+
 /*---------------------------------------------------------------------------Fournisseur-----------------------------------------------------------------------------*/ 
 
 
