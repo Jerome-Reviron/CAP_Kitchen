@@ -142,33 +142,33 @@ class Unite{
     
     //---------------------------------- Récupérer toutes les Valeurs distinctes ---------------------------------//
 
-    public static function getValeursFromDatabase() {
+    public static function getUnite_recettesFromDatabase() {
         $bdd = bddconnexion::getInstance()->getBdd();
         $stmt = $bdd->prepare("SELECT DISTINCT Nom_Unite FROM Unite Where Genre = 'Unité de recette'"); 
         $stmt->execute();
-        $Valeurs = $stmt->fetchAll(PDO::FETCH_COLUMN);
-        return $Valeurs;
+        $Unite_recettes = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return $Unite_recettes;
     }
 
     //---------------------------------- Récupérer toutes les Conditionnements distinctes ---------------------------------//
 
-    public static function getConditionnementsFromDatabase() {
+    public static function getConditionnement_achatsFromDatabase() {
         $bdd = bddconnexion::getInstance()->getBdd();
         $stmt = $bdd->prepare("SELECT DISTINCT Nom_Unite, Chiffre, Valeur FROM Unite WHERE Genre = 'Conditionnement achat'"); 
         $stmt->execute();
-        $Conditionnements = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $Conditionnements;
+        $Conditionnement_achats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $Conditionnement_achats;
     }    
 
 
         //---------------------------------- Récupérer toutes les Unites distinctes ---------------------------------//
 
-        public static function getUnitesFromDatabase() {
+        public static function getUnite_achatsFromDatabase() {
             $bdd = bddconnexion::getInstance()->getBdd();
             $stmt = $bdd->prepare("SELECT DISTINCT Nom_Unite FROM Unite"); 
             $stmt->execute();
-            $Unites = $stmt->fetchAll(PDO::FETCH_COLUMN);
-            return $Unites;
+            $Unite_achats = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            return $Unite_achats;
         }
         
     /**

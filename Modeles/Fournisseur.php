@@ -150,6 +150,15 @@ class Fournisseur{
         }
     }
 
+    //---------------------------------- Récupérer toutes les Genres distinctes ---------------------------------//
+
+    public static function getFournisseursFromDatabase() {
+        $bdd = bddconnexion::getInstance()->getBdd();
+        $stmt = $bdd->prepare("SELECT DISTINCT Id_Fournisseur, Nom_Fournisseur FROM Fournisseur"); 
+        $stmt->execute();
+        $Fournisseurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $Fournisseurs;
+    }    
 
     /**
      * Get the value of Id_Fournisseur

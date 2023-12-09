@@ -796,9 +796,11 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
         inset -5px -5px 15px rgba(187, 187, 187, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
 }
 
-.Panel_boss_inscription .optionsValeursDiv,
-.Panel_boss_inscription .optionsConditionnementsDiv,
-.Panel_boss_inscription .optionsUnitesDiv {
+.Panel_boss_inscription .optionsUnite_recettesDiv,
+.Panel_boss_inscription .optionsConditionnement_achatsDiv,
+.Panel_boss_inscription .optionsUnite_achatsDiv,
+.Panel_boss_inscription .optionsAllergenesDiv,
+.Panel_boss_inscription .optionsFournisseursDiv {
     display: none;
     position: absolute;
     width: 200px;
@@ -812,9 +814,11 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     box-shadow: 0 15px 25px rgba(0,0,0,0.15);
 }
 
-.Panel_boss_inscription .optionsValeursDiv .scrollable-container,
-.Panel_boss_inscription .optionsConditionnementsDiv .scrollable-container,
-.Panel_boss_inscription .optionsUnitesDiv .scrollable-container {
+.Panel_boss_inscription .optionsUnite_recettesDiv .scrollable-container,
+.Panel_boss_inscription .optionsConditionnement_achatsDiv .scrollable-container,
+.Panel_boss_inscription .optionsUnite_achatsDiv .scrollable-container,
+.Panel_boss_inscription .optionsAllergenesDiv .scrollable-container,
+.Panel_boss_inscription .optionsFournisseursDiv .scrollable-container {
     max-height: 120px;
     overflow-y: auto;
 }
@@ -831,9 +835,11 @@ section.dark .menu-bar .bottom-content .mode .toggle-switch .switch::before{
     background-color: #1a2d40; 
 }
 
-.Panel_boss_inscription .optionsValeursDiv .valeursButton,
-.Panel_boss_inscription .optionsConditionnementsDiv .conditionnementsButton,
-.Panel_boss_inscription .optionsUnitesDiv .unitesButton {
+.Panel_boss_inscription .optionsUnite_recettesDiv .Unite_recettesButton,
+.Panel_boss_inscription .optionsConditionnement_achatsDiv .Conditionnement_achatsButton,
+.Panel_boss_inscription .optionsUnite_achatsDiv .Unite_achatsButton,
+.Panel_boss_inscription .optionsAllergenesDiv .AllergenesButton,
+.Panel_boss_inscription .optionsFournisseursDiv .FournisseursButton {
     justify-content: baseline;
     align-items: center;
     width: 100%;
@@ -1391,5 +1397,4 @@ background-color: #9D8A57;
     border: 1px solid #9D8A57;
     border-radius: 10px;
 }
-
 

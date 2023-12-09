@@ -29,4 +29,3 @@ if(!empty($_POST['Pseudo']) && !empty($_POST['Password'])) {
 }
 ?>
 <script type="text/javascript" src="./Vues/JS/connexion_admin.js"></script>
-

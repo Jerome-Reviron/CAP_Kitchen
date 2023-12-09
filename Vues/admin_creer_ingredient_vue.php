@@ -28,9 +28,19 @@
                 <span>Prix d'achat</span>
             </div>
             <div class="inputBox">
-            <input type="text" name="Unite_achat" required="required" autocomplete="off">
+                <input type="text" name="Unite_achat" required="required" autocomplete="off">
                 <i class="fa-solid fa-hashtag"></i>
                 <span>Unité d'achat</span>
+            </div>
+            <div class="inputBox">
+                <input type="text" name="Allergene" required="required" autocomplete="off">
+                <i class="fa-solid fa-hashtag"></i>
+                <span>Allergene</span>
+            </div>
+            <div class="inputBox">
+                <input type="text" name="Fournisseur" required="required" autocomplete="off">
+                <i class="fa-solid fa-hashtag"></i>
+                <span>Fournisseur</span>
             </div>
             <div class="inputBox">
                 <input type="submit" value="Inscription">
@@ -39,47 +49,77 @@
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         </form>
     </div>
-    <div id="optionsValeursDiv" class="optionsValeursDiv">
+    <div id="optionsUnite_recettesDiv" class="optionsUnite_recettesDiv">
         <div class="scrollable-container">
             <?php
-            // Récupérer les Valeurs depuis la base de données
-            $Valeurs = Unite::getValeursFromDatabase();
+            // Récupérer les Unite_recettes depuis la base de données
+            $Unite_recettes = Unite::getUnite_recettesFromDatabase();
 
-            // Parcourir les Valeurs pour les afficher comme cases à cocher
-            foreach ($Valeurs as $Valeur) {
-                echo "<label><input type='checkbox' name='Valeurs[]' value='{$Valeur}'> {$Valeur}</label><br>";
+            // Parcourir les Unite_recettes pour les afficher comme cases à cocher
+            foreach ($Unite_recettes as $Unite_recette) {
+                echo "<label><input type='checkbox' name='Unite_recettes[]' value='{$Unite_recette}'> {$Unite_recette}</label><br>";
             }
             ?>
         </div>
-        <button id="valeursButton" class="valeursButton">Valider</button>
+        <button id="Unite_recettesButton" class="Unite_recettesButton">Valider</button>
     </div>
-    <div id="optionsConditionnementsDiv" class="optionsConditionnementsDiv">
+    <div id="optionsConditionnement_achatsDiv" class="optionsConditionnement_achatsDiv">
         <div class="scrollable-container">
             <?php
-            // Récupérer les Conditionnements depuis la base de données
-            $Conditionnements = Unite::getConditionnementsFromDatabase();
+            // Récupérer les Conditionnement_achats depuis la base de données
+            $Conditionnement_achats = Unite::getConditionnement_achatsFromDatabase();
 
-            // Parcourir les Conditionnements pour les afficher comme boutons radio
-            foreach ($Conditionnements as $Conditionnement) {
-                $optionValue = "{$Conditionnement['Nom_Unite']} {$Conditionnement['Chiffre']} {$Conditionnement['Valeur']}";
-                echo "<label><input type='radio' name='Conditionnements' value='{$optionValue}'> {$optionValue}</label><br>";
+            // Parcourir les Conditionnement_achats pour les afficher comme boutons radio
+            foreach ($Conditionnement_achats as $Conditionnement_achat) {
+                $optionValue = "{$Conditionnement_achat['Nom_Unite']} {$Conditionnement_achat['Chiffre']} {$Conditionnement_achat['Valeur']}";
+                echo "<label><input type='radio' name='Conditionnement_achats' value='{$optionValue}'> {$optionValue}</label><br>";
             }
             ?>
         </div>
-        <button id="conditionnementsButton" class="conditionnementsButton">Valider</button>
+        <button id="Conditionnement_achatsButton" class="Conditionnement_achatsButton">Valider</button>
     </div>
-    <div id="optionsUnitesDiv" class="optionsUnitesDiv">
+    <div id="optionsUnite_achatsDiv" class="optionsUnite_achatsDiv">
         <div class="scrollable-container">
             <?php
-            // Récupérer les Unites depuis la base de données
-            $Unites = Unite::getUnitesFromDatabase();
+            // Récupérer les Unite_achats depuis la base de données
+            $Unite_achats = Unite::getUnite_achatsFromDatabase();
 
-            // Parcourir les Unites pour les afficher comme boutons radio
-            foreach ($Unites as $Unite) {
-                echo "<label><input type='radio' name='Unites' value='{$Unite}'> {$Unite}</label><br>";
+            // Parcourir les Unite_achats pour les afficher comme boutons radio
+            foreach ($Unite_achats as $Unite_achat) {
+                echo "<label><input type='radio' name='Unite_achats' value='{$Unite_achat}'> {$Unite_achat}</label><br>";
             }
             ?>
         </div>
-        <button id="unitesButton" class="unitesButton">Valider</button>
+        <button id="Unite_achatsButton" class="Unite_achatsButton">Valider</button>
+    </div>
+    <div id="optionsAllergenesDiv" class="optionsAllergenesDiv">
+        <div class="scrollable-container">
+            <?php
+            // Récupérer les Allergenes depuis la base de données
+            $Allergenes = Allergene::getAllergenesFromDatabase();
+
+            // Parcourir les Allergenes pour les afficher comme boutons checkbox
+            foreach ($Allergenes as $Allergene) {
+                $Nom_Allergene = $Allergene['Nom_Allergene'];
+                echo "<label><input type='checkbox' name='Allergenes[]' value='{$Nom_Allergene}'> {$Nom_Allergene}</label><br>";
+            }
+            ?>
+        </div>
+        <button id="AllergenesButton" class="AllergenesButton">Valider</button>
+    </div>
+    <div id="optionsFournisseursDiv" class="optionsFournisseursDiv">
+        <div class="scrollable-container">
+            <?php
+            // Récupérer les Fournisseurs depuis la base de données
+            $Fournisseurs = Fournisseur::getFournisseursFromDatabase();
+
+            // Parcourir les Fournisseurs pour les afficher comme boutons checkbox
+            foreach ($Fournisseurs as $Fournisseur) {
+                $Nom_Fournisseur = $Fournisseur['Nom_Fournisseur'];
+                echo "<label><input type='checkbox' name='Fournisseurs[]' value='{$Nom_Fournisseur}'> {$Nom_Fournisseur}</label><br>";
+            }
+            ?>
+        </div>
+        <button id="FournisseursButton" class="FournisseursButton">Valider</button>
     </div>
 </div>

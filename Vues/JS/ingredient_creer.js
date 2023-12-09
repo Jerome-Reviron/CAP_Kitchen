@@ -5,40 +5,40 @@ document.addEventListener('DOMContentLoaded', function () {
     var uniteRecetteInput = document.querySelector('input[name="Unite_recette"]');
     
     // Récupérer la div d'options
-    var optionsValeursDiv = document.getElementById('optionsValeursDiv');
+    var optionsUnite_recettesDiv = document.getElementById('optionsUnite_recettesDiv');
 
-    // Récupérer le bouton de valeurs
-    var valeursButton = document.getElementById('valeursButton');
+    // Récupérer le bouton de Unite_recettes
+    var Unite_recettesButton = document.getElementById('Unite_recettesButton');
 
     // Ajouter un écouteur d'événements sur le focus de l'input Unite_recette
     uniteRecetteInput.addEventListener('focus', function () {
         // Afficher la div d'options
-        optionsValeursDiv.style.display = 'block';
+        optionsUnite_recettesDiv.style.display = 'block';
     });
 
-    // Ajouter un écouteur d'événements sur le bouton de valeurs
-    valeursButton.addEventListener('click', function () {
+    // Ajouter un écouteur d'événements sur le bouton de Unite_recettes
+    Unite_recettesButton.addEventListener('click', function () {
         // Récupérer toutes les cases à cocher cochées
-        var checkedCheckboxes = document.querySelectorAll('input[name="Valeurs[]"]:checked');
+        var checkedCheckboxes = document.querySelectorAll('input[name="Unite_recettes[]"]:checked');
         
-        // Construire une chaîne avec les valeurs des cases à cocher séparées par "/"
+        // Construire une chaîne avec les Unite_recettes des cases à cocher séparées par "/"
         var selectedValues = Array.from(checkedCheckboxes).map(function (checkbox) {
             return checkbox.value;
         }).join(" / ");
 
-        // Mettre à jour l'input Unite_recette avec les valeurs sélectionnées
+        // Mettre à jour l'input Unite_recette avec les Unite_recettes sélectionnées
         uniteRecetteInput.value = selectedValues;
 
         // Masquer la div d'options
-        optionsValeursDiv.style.display = 'none';
+        optionsUnite_recettesDiv.style.display = 'none';
     });
 
     // Ajouter un écouteur d'événements sur le clic du document
     document.addEventListener('click', function (event) {
-        // Vérifier si l'événement de clic provient de la div optionsValeursDiv ou de l'input Unite_recette
-        if (!optionsValeursDiv.contains(event.target) && event.target !== uniteRecetteInput) {
+        // Vérifier si l'événement de clic provient de la div optionsUnite_recettesDiv ou de l'input Unite_recette
+        if (!optionsUnite_recettesDiv.contains(event.target) && event.target !== uniteRecetteInput) {
             // Masquer la div d'options lorsque l'utilisateur clique en dehors de la div
-            optionsValeursDiv.style.display = 'none';
+            optionsUnite_recettesDiv.style.display = 'none';
         }
     });
 });
@@ -51,35 +51,35 @@ document.addEventListener('DOMContentLoaded', function () {
     var conditionnementAchatInput = document.querySelector('input[name="Conditionnement_achat"]');
     
     // Récupérer la div d'options
-    var optionsConditionnementsDiv = document.getElementById('optionsConditionnementsDiv');
+    var optionsConditionnement_achatsDiv = document.getElementById('optionsConditionnement_achatsDiv');
 
-    // Récupérer le bouton de validation pour les conditionnements
-    var conditionnementsButton = document.getElementById('conditionnementsButton');
+    // Récupérer le bouton de validation pour les Conditionnement_achats
+    var Conditionnement_achatsButton = document.getElementById('Conditionnement_achatsButton');
 
     // Ajouter un écouteur d'événements sur le focus de l'input Conditionnement_achat
     conditionnementAchatInput.addEventListener('focus', function () {
         // Afficher la div d'options
-        optionsConditionnementsDiv.style.display = 'block';
+        optionsConditionnement_achatsDiv.style.display = 'block';
     });
 
-    // Ajouter un écouteur d'événements sur le bouton de validation pour les conditionnements
-    conditionnementsButton.addEventListener('click', function () {
+    // Ajouter un écouteur d'événements sur le bouton de validation pour les Conditionnement_achats
+    Conditionnement_achatsButton.addEventListener('click', function () {
         // Récupérer le bouton radio sélectionné
-        var selectedRadio = document.querySelector('input[name="Conditionnements"]:checked');
+        var selectedRadio = document.querySelector('input[name="Conditionnement_achats"]:checked');
         
         // Mettre à jour l'input Conditionnement_achat avec la valeur sélectionnée
         conditionnementAchatInput.value = selectedRadio ? selectedRadio.value : '';
 
         // Masquer la div d'options
-        optionsConditionnementsDiv.style.display = 'none';
+        optionsConditionnement_achatsDiv.style.display = 'none';
     });
 
     // Ajouter un écouteur d'événements sur le clic du document
     document.addEventListener('click', function (event) {
-        // Vérifier si l'événement de clic provient de la div optionsConditionnementsDiv ou de l'input Conditionnement_achat
-        if (!optionsConditionnementsDiv.contains(event.target) && event.target !== conditionnementAchatInput) {
+        // Vérifier si l'événement de clic provient de la div optionsConditionnement_achatsDiv ou de l'input Conditionnement_achat
+        if (!optionsConditionnement_achatsDiv.contains(event.target) && event.target !== conditionnementAchatInput) {
             // Masquer la div d'options lorsque l'utilisateur clique en dehors de la div
-            optionsConditionnementsDiv.style.display = 'none';
+            optionsConditionnement_achatsDiv.style.display = 'none';
         }
     });
 });
@@ -93,40 +93,127 @@ document.addEventListener('DOMContentLoaded', function () {
     var uniteAchatInput = document.querySelector('input[name="Unite_achat"]');
     
     // Récupérer la div d'options
-    var optionsUnitesDiv = document.getElementById('optionsUnitesDiv');
+    var optionsUnite_achatsDiv = document.getElementById('optionsUnite_achatsDiv');
 
-    // Récupérer le bouton de validation pour les Unites
-    var unitesButton = document.getElementById('unitesButton');
+    // Récupérer le bouton de validation pour les Unite_achats
+    var Unite_achatsButton = document.getElementById('Unite_achatsButton');
 
-    // Ajouter un écouteur d'événements sur le focus de l'input Unite_achat
+    // Ajouter un écouteur d'événements sur le focus de l'input Unite_achat_achat
     uniteAchatInput.addEventListener('focus', function () {
         // Afficher la div d'options
-        optionsUnitesDiv.style.display = 'block';
+        optionsUnite_achatsDiv.style.display = 'block';
     });
 
-    // Ajouter un écouteur d'événements sur le bouton de validation pour les Unites
-    unitesButton.addEventListener('click', function () {
+    // Ajouter un écouteur d'événements sur le bouton de validation pour les Unite_achats
+    Unite_achatsButton.addEventListener('click', function () {
         // Récupérer le bouton radio sélectionné
-        var selectedRadio = document.querySelector('input[name="Unites"]:checked');
+        var selectedRadio = document.querySelector('input[name="Unite_achats"]:checked');
         
-        // Mettre à jour l'input Unite_achat avec la valeur sélectionnée
+        // Mettre à jour l'input Unite_achat_achat avec la valeur sélectionnée
         uniteAchatInput.value = selectedRadio ? selectedRadio.value : '';
 
         // Masquer la div d'options
-        optionsUnitesDiv.style.display = 'none';
+        optionsUnite_achatsDiv.style.display = 'none';
     });
 
     // Ajouter un écouteur d'événements sur le clic du document
     document.addEventListener('click', function (event) {
-        // Vérifier si l'événement de clic provient de la div optionsUnitesDiv ou de l'input Unite_achat
-        if (!optionsUnitesDiv.contains(event.target) && event.target !== uniteAchatInput) {
+        // Vérifier si l'événement de clic provient de la div optionsUnite_achatsDiv ou de l'input Unite_achat
+        if (!optionsUnite_achatsDiv.contains(event.target) && event.target !== uniteAchatInput) {
             // Masquer la div d'options lorsque l'utilisateur clique en dehors de la div
-            optionsUnitesDiv.style.display = 'none';
+            optionsUnite_achatsDiv.style.display = 'none';
         }
     });
 });
 
+/*---------------------------------------------------------------------------Allergene-----------------------------------------------------------------------------*/ 
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Récupérer l'input Allergene
+    var uniteRecetteInput = document.querySelector('input[name="Allergene"]');
+    
+    // Récupérer la div d'options
+    var optionsAllergenesDiv = document.getElementById('optionsAllergenesDiv');
+
+    // Récupérer le bouton de Allergenes
+    var AllergenesButton = document.getElementById('AllergenesButton');
+
+    // Ajouter un écouteur d'événements sur le focus de l'input Allergene
+    uniteRecetteInput.addEventListener('focus', function () {
+        // Afficher la div d'options
+        optionsAllergenesDiv.style.display = 'block';
+    });
+
+    // Ajouter un écouteur d'événements sur le bouton de Allergenes
+    AllergenesButton.addEventListener('click', function () {
+        // Récupérer toutes les cases à cocher cochées
+        var checkedCheckboxes = document.querySelectorAll('input[name="Allergenes[]"]:checked');
+        
+        // Construire une chaîne avec les Allergenes des cases à cocher séparées par "/"
+        var selectedValues = Array.from(checkedCheckboxes).map(function (checkbox) {
+            return checkbox.value;
+        }).join(" / ");
+
+        // Mettre à jour l'input Allergene avec les Allergenes sélectionnées
+        uniteRecetteInput.value = selectedValues;
+
+        // Masquer la div d'options
+        optionsAllergenesDiv.style.display = 'none';
+    });
+
+    // Ajouter un écouteur d'événements sur le clic du document
+    document.addEventListener('click', function (event) {
+        // Vérifier si l'événement de clic provient de la div optionsAllergenesDiv ou de l'input Allergene
+        if (!optionsAllergenesDiv.contains(event.target) && event.target !== uniteRecetteInput) {
+            // Masquer la div d'options lorsque l'utilisateur clique en dehors de la div
+            optionsAllergenesDiv.style.display = 'none';
+        }
+    });
+});
+
+/*---------------------------------------------------------------------------Fournisseur-----------------------------------------------------------------------------*/ 
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Récupérer l'input Fournisseur
+    var uniteRecetteInput = document.querySelector('input[name="Fournisseur"]');
+    
+    // Récupérer la div d'options
+    var optionsFournisseursDiv = document.getElementById('optionsFournisseursDiv');
 
+    // Récupérer le bouton de Fournisseurs
+    var FournisseursButton = document.getElementById('FournisseursButton');
+
+    // Ajouter un écouteur d'événements sur le focus de l'input Fournisseur
+    uniteRecetteInput.addEventListener('focus', function () {
+        // Afficher la div d'options
+        optionsFournisseursDiv.style.display = 'block';
+    });
+
+    // Ajouter un écouteur d'événements sur le bouton de Fournisseurs
+    FournisseursButton.addEventListener('click', function () {
+        // Récupérer toutes les cases à cocher cochées
+        var checkedCheckboxes = document.querySelectorAll('input[name="Fournisseurs[]"]:checked');
+        
+        // Construire une chaîne avec les Fournisseurs des cases à cocher séparées par "/"
+        var selectedValues = Array.from(checkedCheckboxes).map(function (checkbox) {
+            return checkbox.value;
+        }).join(" / ");
+
+        // Mettre à jour l'input Fournisseur avec les Fournisseurs sélectionnées
+        uniteRecetteInput.value = selectedValues;
+
+        // Masquer la div d'options
+        optionsFournisseursDiv.style.display = 'none';
+    });
+
+    // Ajouter un écouteur d'événements sur le clic du document
+    document.addEventListener('click', function (event) {
+        // Vérifier si l'événement de clic provient de la div optionsFournisseursDiv ou de l'input Fournisseur
+        if (!optionsFournisseursDiv.contains(event.target) && event.target !== uniteRecetteInput) {
+            // Masquer la div d'options lorsque l'utilisateur clique en dehors de la div
+            optionsFournisseursDiv.style.display = 'none';
+        }
+    });
+});
 
