@@ -22,7 +22,7 @@ class Ingredient{
 
     //----------------------------------------------- Creer -----------------------------------------------
 
-    public function createIngredient() {
+    public function createIngredient($Id_Admin, $AllergeneIds, $Id_Categorie, $FournisseurIds) {
         $bdd = bddconnexion::getInstance()->getBdd();
         $stmt = $bdd->prepare('INSERT INTO Ingredient (Nom_Ingredient, Photo, Unite_recette, Conditionnement_achat, Prix_achat, Unite_achat) 
                                 VALUES (:Nom_Ingredient, :Photo, :Unite_recette, :Conditionnement_achat, :Prix_achat, :Unite_achat)');
@@ -33,13 +33,53 @@ class Ingredient{
         $stmt->bindParam(':Prix_achat', $this->Prix_achat, PDO::PARAM_STR);
         $stmt->bindParam(':Unite_achat', $this->Unite_achat, PDO::PARAM_STR);
         $stmt->execute();
-    }
-    //----------------------------------------------- Vérifier -----------------------------------------------
 
-    public static function checkNomIngredientExists($Nom_Ingredient) {
-        $bdd = bddconnexion::getInstance()->getBdd();
-        $stmt = $bdd->prepare("SELECT * FROM Ingredient WHERE Nom_Ingredient = :Nom_Ingredient");
+        // Récupérer l'ID de la catégorie nouvellement créée
+        $Id_Ingredient = $bdd->lastInsertId();
+
+        // $Id_Ingredient est défini dans l'instance actuelle
+        $this->Id_Ingredient = $Id_Ingredient;
+
+        // Insertion dans la table Produit
+        $stmtProduit = $bdd->prepare('INSERT INTO Produit (Id_Admin, Id_Ingredient) VALUES (:Id_Admin, :Id_Ingredient)');
+        $stmtProduit->bindParam(':Id_Admin', $Id_Admin, PDO::PARAM_INT); 
+        $stmtProduit->bindParam(':Id_Ingredient', $Id_Ingredient, PDO::PARAM_INT);
+        $stmtProduit->execute();
+        
+        // Insertion dans la table Contient pour chaque allergène
+        $stmtContient = $bdd->prepare('INSERT INTO Contient (Id_Allergene, Id_Ingredient) VALUES (:Id_Allergene, :Id_Ingredient)');
+            foreach ($AllergeneIds as $Id_Allergene) {
+                $stmtContient->bindParam(':Id_Allergene', $Id_Allergene, PDO::PARAM_INT); 
+                $stmtContient->bindParam(':Id_Ingredient', $Id_Ingredient, PDO::PARAM_INT);
+                $stmtContient->execute();
+            }
+
+        // Insertion dans la table Provient
+        $stmtProvient = $bdd->prepare('INSERT INTO Provient (Id_Categorie, Id_Ingredient) VALUES (:Id_Categorie, :Id_Ingredient)');
+        $stmtProvient->bindParam(':Id_Categorie', $Id_Categorie, PDO::PARAM_INT); 
+        $stmtProvient->bindParam(':Id_Ingredient', $Id_Ingredient, PDO::PARAM_INT);
+        $stmtProvient->execute();
+
+        // Insertion dans la table Livre pour chaque fournisseur
+        $stmtLivre = $bdd->prepare('INSERT INTO Livre (Id_Fournisseur, Id_Ingredient) VALUES (:Id_Fournisseur, :Id_Ingredient)');
+            foreach ($FournisseurIds as $Id_Fournisseur) {
+                $stmtLivre->bindParam(':Id_Fournisseur', $Id_Fournisseur, PDO::PARAM_INT); 
+                $stmtLivre->bindParam(':Id_Ingredient', $Id_Ingredient, PDO::PARAM_INT);
+                $stmtLivre->execute();
+            }
+    }
+
+     //----------------------------------------------- Vérifier -----------------------------------------------
+
+    public static function checkNomIngredientExists($Nom_Ingredient, $Id_Entreprise) {
+        $stmt = bddconnexion::getInstance()->getBdd()->prepare("SELECT I.* 
+                                                                FROM Ingredient I 
+                                                                JOIN Produit P ON I.Id_Ingredient = P.Id_Ingredient
+                                                                JOIN Admin A ON P.Id_Admin = A.Id_Admin
+                                                                WHERE I.Nom_Ingredient = :Nom_Ingredient
+                                                                AND A.Id_Entreprise = :Id_Entreprise");
         $stmt->bindParam(':Nom_Ingredient', $Nom_Ingredient, PDO::PARAM_STR);
+        $stmt->bindParam(':Id_Entreprise', $Id_Entreprise, PDO::PARAM_INT);
         $stmt->execute();
         $data = $stmt->fetchAll();
         $row = $stmt->rowCount();

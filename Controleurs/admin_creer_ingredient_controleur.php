@@ -10,8 +10,9 @@ if (isset($_SESSION['Admin'])) {
 
     if ($droit == 1 || $droit == 2 || $droit == 3 || $droit == 4) {
 
-        // Appeler la fonction pour récupérer la liste des unités
-        $liste_unites = Unite::getAllUnite($Admin->getId_Entreprise());
+        $Categories = Categorie::getCategoriesFromDatabase();
+        $Fournisseurs = Fournisseur::getFournisseursFromDatabase();
+        $Allergenes = Allergene::getAllergenesFromDatabase();
 
         if(!empty($_POST['Nom_Ingredient']) && !empty($_POST['Unite_recette'])
         && !empty($_POST['Conditionnement_achat']) && !empty($_POST['Prix_achat']) && !empty($_POST['Unite_achat'])){
@@ -29,7 +30,7 @@ if (isset($_SESSION['Admin'])) {
                 if (in_array($mimeType, $allowedTypes)) {
                 
                     $Securiter->verifyCsrfToken($_POST['csrf_token']);
-                
+
                     // Patch XSS
                     $Nom_Ingredient =  htmlspecialchars(trim(strip_tags($_POST['Nom_Ingredient'])));
                     $Unite_recette =  htmlspecialchars(trim(strip_tags($_POST['Unite_recette'])));
@@ -39,19 +40,49 @@ if (isset($_SESSION['Admin'])) {
 
                     $Prix_achat = str_replace(',', '.', $Prix_achat);
                     $Prix_achat = number_format($Prix_achat, 2, '.', '');
-    
+
+                    // Récupération de l'ID de la catégorie
+                    $Id_Categorie = isset($_POST['Id_Categorie']) ? filter_var($_POST['Id_Categorie'], FILTER_VALIDATE_INT) : null;
+
+                    // Vérification de la validité de l'ID de catégorie
+                    if ($Id_Categorie === false || $Id_Categorie === null) {
+                        // Gestion de l'erreur, par exemple redirection vers une page d'erreur
+                        echo "Type Id_Catégorie non autorisé.<br>";
+                        header('Location: index.php?uc=admin_creer_ingredient&reg_err=TypeCategorie');
+                        exit();
+                    }
+
+                    // Récupération et validation des IDs des allergènes
+                    $AllergeneIds = isset($_POST['Id_Allergene']) ? explode(" / ", $_POST['Id_Allergene']) : [];
+                    foreach ($AllergeneIds as $Id_Allergene) {
+                        if (!filter_var($Id_Allergene, FILTER_VALIDATE_INT)) {
+                            echo "Type Id_Allergene non autorisé.<br>";
+                            header('Location: index.php?uc=admin_creer_ingredient&reg_err=TypeAllergene');
+                            exit();
+                        }
+                    }
+
+                    // Récupération et validation des IDs des fournisseurs (si applicable)
+                    $FournisseurIds = isset($_POST['Id_Fournisseur']) ? explode(" / ", $_POST['Id_Fournisseur']) : [];
+                    foreach ($FournisseurIds as $Id_Fournisseur) {
+                        if (!filter_var($Id_Fournisseur, FILTER_VALIDATE_INT)) {
+                            echo "Type Id_Fournisseur non autorisé.<br>";
+                            header('Location: index.php?uc=admin_creer_ingredient&reg_err=TypeFournisseur');
+                            exit();
+                        }
+                    }
 
                     $bdd = bddconnexion::getInstance();
                     // Instanciation de la classe Ingredient
                     $Ingredient = new Ingredient(NULL, $Nom_Ingredient, $Photo, $Unite_recette, $Conditionnement_achat, $Prix_achat, $Unite_achat);
 
                     // Vérifie si l'Ingrédient existe déjà
-                    $Nom_IngredientExiste = Ingredient::checkNomIngredientExists($Nom_Ingredient);
-                                
+                    $Nom_IngredientExiste = Ingredient::checkNomIngredientExists($Nom_Ingredient, $Admin->getId_Entreprise());
+
                     if(sizeof($Nom_IngredientExiste) == 0) {
                         // Création de l'Ingrédient
                         echo "Création de l'Ingrédient...<br>";
-                        $Ingredient->createIngredient();
+                        $Ingredient->createIngredient($Id_Admin, $AllergeneIds, $Id_Categorie, $FournisseurIds);
                         echo "Ingrédient créé avec succès.<br>";
 
                         // Redirection vers la page d'accueil

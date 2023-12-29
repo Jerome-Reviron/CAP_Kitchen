@@ -129,135 +129,123 @@ document.addEventListener('DOMContentLoaded', function () {
 /*---------------------------------------------------------------------------Allergene-----------------------------------------------------------------------------*/ 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Récupérer l'input Allergene
-    var uniteRecetteInput = document.querySelector('input[name="Allergene"]');
-    
-    // Récupérer la div d'options
+    var AllergeneInput = document.querySelector('input[name="Allergene"]');
     var optionsAllergenesDiv = document.getElementById('optionsAllergenesDiv');
-
-    // Récupérer le bouton de Allergenes
     var AllergenesButton = document.getElementById('AllergenesButton');
 
-    // Ajouter un écouteur d'événements sur le focus de l'input Allergene
-    uniteRecetteInput.addEventListener('focus', function () {
-        // Afficher la div d'options
+    AllergeneInput.addEventListener('focus', function () {
         optionsAllergenesDiv.style.display = 'block';
     });
 
-    // Ajouter un écouteur d'événements sur le bouton de Allergenes
     AllergenesButton.addEventListener('click', function () {
-        // Récupérer toutes les cases à cocher cochées
         var checkedCheckboxes = document.querySelectorAll('input[name="Allergenes[]"]:checked');
-        
-        // Construire une chaîne avec les Allergenes des cases à cocher séparées par "/"
-        var selectedValues = Array.from(checkedCheckboxes).map(function (checkbox) {
-            return checkbox.value;
-        }).join(" / ");
+        var AllergeneNames = [];
+        var AllergeneIds = [];
 
-        // Mettre à jour l'input Allergene avec les Allergenes sélectionnées
-        uniteRecetteInput.value = selectedValues;
+        checkedCheckboxes.forEach(function (checkbox) {
+            AllergeneNames.push(checkbox.value);
+            AllergeneIds.push(checkbox.getAttribute('data-id'));
+        });
 
-        // Masquer la div d'options
+        AllergeneInput.value = AllergeneNames.join(" / ");
+
+        var hiddenIdsInput = document.querySelector('input[name="Id_Allergene"]');
+        if (!hiddenIdsInput) {
+            hiddenIdsInput = document.createElement('input');
+            hiddenIdsInput.type = 'hidden';
+            hiddenIdsInput.name = 'Id_Allergene';
+            AllergeneInput.parentNode.appendChild(hiddenIdsInput);
+        }
+        hiddenIdsInput.value = AllergeneIds.join(" / ");
+
         optionsAllergenesDiv.style.display = 'none';
     });
 
-    // Ajouter un écouteur d'événements sur le clic du document
     document.addEventListener('click', function (event) {
-        // Vérifier si l'événement de clic provient de la div optionsAllergenesDiv ou de l'input Allergene
-        if (!optionsAllergenesDiv.contains(event.target) && event.target !== uniteRecetteInput) {
-            // Masquer la div d'options lorsque l'utilisateur clique en dehors de la div
+        if (!optionsAllergenesDiv.contains(event.target) && event.target !== AllergeneInput) {
             optionsAllergenesDiv.style.display = 'none';
         }
     });
 });
 
+
 /*---------------------------------------------------------------------------Categorie-----------------------------------------------------------------------------*/ 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Récupérer l'input Categorie
     var CategorieInput = document.querySelector('input[name="Categorie"]');
-    
-    // Récupérer la div d'options
     var optionsCategoriesDiv = document.getElementById('optionsCategoriesDiv');
-
-    // Récupérer le bouton de Categories
     var CategoriesButton = document.getElementById('CategoriesButton');
 
-    // Ajouter un écouteur d'événements sur le focus de l'input Categorie
     CategorieInput.addEventListener('focus', function () {
-        // Afficher la div d'options
         optionsCategoriesDiv.style.display = 'block';
     });
 
-    // Ajouter un écouteur d'événements sur le bouton de Categories
     CategoriesButton.addEventListener('click', function () {
-        // Récupérer toutes les cases à cocher cochées
-        var checkedCheckboxes = document.querySelectorAll('input[name="Categories[]"]:checked');
-        
-        // Construire une chaîne avec les Categories des cases à cocher séparées par "/"
-        var selectedValues = Array.from(checkedCheckboxes).map(function (checkbox) {
-            return checkbox.value;
-        }).join(" / ");
+        var checkedCheckbox = document.querySelector('input[name="Categories[]"]:checked');
+    
+        if (checkedCheckbox) {
+            CategorieInput.value = checkedCheckbox.value;
 
-        // Mettre à jour l'input Categorie avec les Categories sélectionnées
-        CategorieInput.value = selectedValues;
+            var hiddenIdInput = document.querySelector('input[name="Id_Categorie"]');
+            if (!hiddenIdInput) {
+                hiddenIdInput = document.createElement('input');
+                hiddenIdInput.type = 'hidden';
+                hiddenIdInput.name = 'Id_Categorie';
+                CategorieInput.parentNode.appendChild(hiddenIdInput);
+            }
+            hiddenIdInput.value = checkedCheckbox.getAttribute('data-id');
+        }
 
-        // Masquer la div d'options
         optionsCategoriesDiv.style.display = 'none';
     });
 
-    // Ajouter un écouteur d'événements sur le clic du document
     document.addEventListener('click', function (event) {
-        // Vérifier si l'événement de clic provient de la div optionsCategoriesDiv ou de l'input Categorie
         if (!optionsCategoriesDiv.contains(event.target) && event.target !== CategorieInput) {
-            // Masquer la div d'options lorsque l'utilisateur clique en dehors de la div
             optionsCategoriesDiv.style.display = 'none';
         }
     });
 });
 
 
+
 /*---------------------------------------------------------------------------Fournisseur-----------------------------------------------------------------------------*/ 
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Récupérer l'input Fournisseur
-    var uniteRecetteInput = document.querySelector('input[name="Fournisseur"]');
-    
-    // Récupérer la div d'options
+    var FournisseurInput = document.querySelector('input[name="Fournisseur"]');
     var optionsFournisseursDiv = document.getElementById('optionsFournisseursDiv');
-
-    // Récupérer le bouton de Fournisseurs
     var FournisseursButton = document.getElementById('FournisseursButton');
 
-    // Ajouter un écouteur d'événements sur le focus de l'input Fournisseur
-    uniteRecetteInput.addEventListener('focus', function () {
-        // Afficher la div d'options
+    FournisseurInput.addEventListener('focus', function () {
         optionsFournisseursDiv.style.display = 'block';
     });
 
-    // Ajouter un écouteur d'événements sur le bouton de Fournisseurs
     FournisseursButton.addEventListener('click', function () {
-        // Récupérer toutes les cases à cocher cochées
         var checkedCheckboxes = document.querySelectorAll('input[name="Fournisseurs[]"]:checked');
-        
-        // Construire une chaîne avec les Fournisseurs des cases à cocher séparées par "/"
-        var selectedValues = Array.from(checkedCheckboxes).map(function (checkbox) {
-            return checkbox.value;
-        }).join(" / ");
+        var FournisseurNames = [];
+        var FournisseurIds = [];
 
-        // Mettre à jour l'input Fournisseur avec les Fournisseurs sélectionnées
-        uniteRecetteInput.value = selectedValues;
+        checkedCheckboxes.forEach(function (checkbox) {
+            FournisseurNames.push(checkbox.value);
+            FournisseurIds.push(checkbox.getAttribute('data-id'));
+        });
 
-        // Masquer la div d'options
+        FournisseurInput.value = FournisseurNames.join(" / ");
+
+        var hiddenIdsInput = document.querySelector('input[name="Id_Fournisseur"]');
+        if (!hiddenIdsInput) {
+            hiddenIdsInput = document.createElement('input');
+            hiddenIdsInput.type = 'hidden';
+            hiddenIdsInput.name = 'Id_Fournisseur';
+            FournisseurInput.parentNode.appendChild(hiddenIdsInput);
+        }
+        hiddenIdsInput.value = FournisseurIds.join(" / ");
+
         optionsFournisseursDiv.style.display = 'none';
     });
 
-    // Ajouter un écouteur d'événements sur le clic du document
     document.addEventListener('click', function (event) {
-        // Vérifier si l'événement de clic provient de la div optionsFournisseursDiv ou de l'input Fournisseur
-        if (!optionsFournisseursDiv.contains(event.target) && event.target !== uniteRecetteInput) {
-            // Masquer la div d'options lorsque l'utilisateur clique en dehors de la div
+        if (!optionsFournisseursDiv.contains(event.target) && event.target !== FournisseurInput) {
             optionsFournisseursDiv.style.display = 'none';
         }
     });

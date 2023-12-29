@@ -103,10 +103,11 @@
             // Récupérer les Allergenes depuis la base de données
             $Allergenes = Allergene::getAllergenesFromDatabase();
 
-            // Parcourir les Allergenes pour les afficher comme boutons checkbox
+            // Parcourir les Allergenes pour les afficher comme cases à cocher
             foreach ($Allergenes as $Allergene) {
+                $Id_Allergene = $Allergene['Id_Allergene']; 
                 $Nom_Allergene = $Allergene['Nom_Allergene'];
-                echo "<label><input type='checkbox' name='Allergenes[]' value='{$Nom_Allergene}'> {$Nom_Allergene}</label><br>";
+                echo "<label><input type='checkbox' name='Allergenes[]' data-id='{$Id_Allergene}' value='{$Nom_Allergene}'> {$Nom_Allergene}</label><br>";
             }
             ?>
         </div>
@@ -116,13 +117,14 @@
         <div class="scrollable-container">
             <?php
             // Récupérer les Categories depuis la base de données
-            $Categories = Categorie::getCategoriesFromDatabase();
+            $Categories = Categorie::getCategoriesFromDatabase(); 
 
             // Parcourir les Categories pour les afficher comme boutons radio
             foreach ($Categories as $Categorie) {
+                $Id_Categorie = $Categorie['Id_Categorie'];
                 $Nom_Categorie = $Categorie['Nom_Categorie'];
-                echo "<label><input type='radio' name='Categories[]' value='{$Categorie['Id_Categorie']}'> {$Nom_Categorie}</label><br>";
-            }            
+                echo "<label><input type='radio' name='Categories[]' data-id='{$Id_Categorie}' value='{$Nom_Categorie}'> {$Nom_Categorie}</label><br>";
+            }                
             ?>
         </div>
         <button id="CategoriesButton" class="CategoriesButton">Valider</button>
@@ -135,8 +137,9 @@
 
             // Parcourir les Fournisseurs pour les afficher comme boutons checkbox
             foreach ($Fournisseurs as $Fournisseur) {
+                $Id_Fournisseur = $Fournisseur['Id_Fournisseur'];
                 $Nom_Fournisseur = $Fournisseur['Nom_Fournisseur'];
-                echo "<label><input type='checkbox' name='Fournisseurs[]' value='{$Nom_Fournisseur}'> {$Nom_Fournisseur}</label><br>";
+                echo "<label><input type='checkbox' name='Fournisseurs[]' data-id='{$Id_Fournisseur}' value='{$Nom_Fournisseur}'> {$Nom_Fournisseur}</label><br>";
             }
             ?>
         </div>
