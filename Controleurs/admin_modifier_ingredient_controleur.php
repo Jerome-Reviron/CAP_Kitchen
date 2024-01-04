@@ -127,4 +127,4 @@ if (isset($_SESSION['Admin'])) {
     header('Location:./index.php?uc=admin_connexion');
 }
 ?>
-<script type="text/javascript" src="./Vues/JS/ingredient_creer.js"></script>
+<script type="text/javascript" src="./Vues/JS/ingredient_modifier.js"></script>
