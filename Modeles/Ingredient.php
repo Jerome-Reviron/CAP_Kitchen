@@ -108,13 +108,15 @@ class Ingredient{
 
     //----------------------------------------------- Modifier -----------------------------------------------
     
-    public function postInfoIngredient($Id, $Nom_Ingredient, $Photo, $Unite_recette, $Conditionnement_achat, $Prix_achat, $Unite_achat) {
+    public function postInfoIngredient($Id, $Nom_Ingredient, $Photo, $Unite_recette, $Conditionnement_achat, $Prix_achat, $Unite_achat,
+                                    $AllergeneIds, $Id_Categorie, $FournisseurIds) {
         $bdd = bddconnexion::getInstance()->getBdd();
+        
+        // Mise à jour de l'ingrédient
         $update = $bdd->prepare("UPDATE Ingredient SET Nom_Ingredient = :Nom_Ingredient, Photo = :Photo, Unite_recette = :Unite_recette,
                                 Conditionnement_achat = :Conditionnement_achat, Prix_achat = :Prix_achat, Unite_achat = :Unite_achat
                                 WHERE Id_Ingredient = :Id");
     
-        // Utilisation de bindParam pour lier les valeurs des variables aux paramètres de la requête préparée
         $update->bindParam(':Id', $Id, PDO::PARAM_INT);
         $update->bindParam(':Nom_Ingredient', $Nom_Ingredient, PDO::PARAM_STR);
         $update->bindParam(':Photo', $Photo, PDO::PARAM_LOB);
@@ -122,9 +124,50 @@ class Ingredient{
         $update->bindParam(':Conditionnement_achat', $Conditionnement_achat, PDO::PARAM_STR);
         $update->bindParam(':Prix_achat', $Prix_achat, PDO::PARAM_STR);
         $update->bindParam(':Unite_achat', $Unite_achat, PDO::PARAM_STR);
-    
+        
         $update->execute();
+    
+        // Mise à jour des allergènes
+        // Supprimer les anciens allergènes
+        $deleteAllergenes = $bdd->prepare("DELETE FROM Contient WHERE Id_Ingredient = :Id");
+        $deleteAllergenes->bindParam(':Id', $Id, PDO::PARAM_INT);
+        $deleteAllergenes->execute();
+    
+        // Ajouter les nouveaux allergènes
+        $addAllergenes = $bdd->prepare("INSERT INTO Contient (Id_Allergene, Id_Ingredient) VALUES (:Id_Allergene, :Id_Ingredient)");
+        foreach ($AllergeneIds as $Id_Allergene) {
+            $addAllergenes->bindParam(':Id_Allergene', $Id_Allergene, PDO::PARAM_INT); 
+            $addAllergenes->bindParam(':Id_Ingredient', $Id, PDO::PARAM_INT);
+            $addAllergenes->execute();
+        }
+    
+        // Mise à jour de la catégorie
+        // Supprimer l'ancienne catégorie
+        $deleteCategorie = $bdd->prepare("DELETE FROM Provient WHERE Id_Ingredient = :Id");
+        $deleteCategorie->bindParam(':Id', $Id, PDO::PARAM_INT);
+        $deleteCategorie->execute();
+    
+        // Ajouter la nouvelle catégorie
+        $addCategorie = $bdd->prepare("INSERT INTO Provient (Id_Categorie, Id_Ingredient) VALUES (:Id_Categorie, :Id_Ingredient)");
+        $addCategorie->bindParam(':Id_Categorie', $Id_Categorie, PDO::PARAM_INT); 
+        $addCategorie->bindParam(':Id_Ingredient', $Id, PDO::PARAM_INT);
+        $addCategorie->execute();
+    
+        // Mise à jour des fournisseurs
+        // Supprimer les anciens fournisseurs
+        $deleteFournisseurs = $bdd->prepare("DELETE FROM Livre WHERE Id_Ingredient = :Id");
+        $deleteFournisseurs->bindParam(':Id', $Id, PDO::PARAM_INT);
+        $deleteFournisseurs->execute();
+    
+        // Ajouter les nouveaux fournisseurs
+        $addFournisseurs = $bdd->prepare("INSERT INTO Livre (Id_Fournisseur, Id_Ingredient) VALUES (:Id_Fournisseur, :Id_Ingredient)");
+        foreach ($FournisseurIds as $Id_Fournisseur) {
+            $addFournisseurs->bindParam(':Id_Fournisseur', $Id_Fournisseur, PDO::PARAM_INT); 
+            $addFournisseurs->bindParam(':Id_Ingredient', $Id, PDO::PARAM_INT);
+            $addFournisseurs->execute();
+        }
     }
+    
 
     //----------------------------------------------- Object -----------------------------------------------
 

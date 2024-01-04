@@ -160,6 +160,30 @@ class Fournisseur{
         return $Fournisseurs;
     }    
 
+    //----------------------------------Récupérer les Fournisseurs d'un ingredients --------------------------------//
+
+    public static function getFournisseursForIngredient($Id) {
+        $bdd = bddconnexion::getInstance()->getBdd(); 
+        $stmt = $bdd->prepare("SELECT F.*
+                            FROM Fournisseur F 
+                            JOIN Livre L ON F.Id_Fournisseur = L.Id_Fournisseur 
+                            WHERE L.Id_Ingredient = :Id");
+    
+        $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
+    
+        $stmt->execute();
+        $FournisseursData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $Fournisseurs = [];
+        foreach ($FournisseursData as $data) {
+            $Fournisseurs[] = new Fournisseur($data['Id_Fournisseur'], $data['Forme_Juridique'], $data['Nom_Fournisseur'], 
+                                            $data['Adresse'], $data['Telephone'], $data['Email'], $data['Numero_SIRET']);
+        }
+    
+        return $Fournisseurs;
+    }
+
+    
     /**
      * Get the value of Id_Fournisseur
      */ 

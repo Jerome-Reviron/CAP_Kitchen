@@ -131,8 +131,30 @@ class Allergene{
         $stmt->execute();
         $Allergenes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $Allergenes;
-    }    
+    }
 
+    //----------------------------------Récupérer les Allergènes d'un ingredients --------------------------------//
+
+    public static function getAllergenesForIngredient($Id) {
+        $bdd = bddconnexion::getInstance()->getBdd(); 
+        $stmt = $bdd->prepare("SELECT A.*
+                            FROM Allergene A 
+                            JOIN Contient C ON A.Id_Allergene = C.Id_Allergene 
+                            WHERE C.Id_Ingredient = :Id");
+    
+        $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
+    
+        $stmt->execute();
+        $AllergenesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $Allergenes = [];
+        foreach ($AllergenesData as $data) {
+            $Allergenes[] = new Allergene($data['Id_Allergene'], $data['Nom_Allergene']);
+        }
+    
+        return $Allergenes;
+    }
+    
     /**
      * Get the value of Id_Allergene
      */ 

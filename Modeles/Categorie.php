@@ -146,6 +146,28 @@ class Categorie{
         return $Categories;
     }
 
+    //----------------------------------Récupérer les Categories d'un ingredients --------------------------------//
+
+    public static function getCategoriesForIngredient($Id) {
+        $bdd = bddconnexion::getInstance()->getBdd(); 
+        $stmt = $bdd->prepare("SELECT C.*
+                            FROM Categorie C 
+                            JOIN Provient P ON C.Id_Categorie = P.Id_Categorie 
+                            WHERE P.Id_Ingredient = :Id");
+    
+        $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
+    
+        $stmt->execute();
+        $CategoriesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $Categories = [];
+        foreach ($CategoriesData as $data) {
+            $Categories[] = new Categorie($data['Id_Categorie'], $data['Nom_Categorie'], $data['Genre']);
+        }
+    
+        return $Categories;
+    }
+
     /**
      * Get the value of Id_Categorie
      */ 
