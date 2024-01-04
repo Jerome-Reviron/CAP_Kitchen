@@ -185,25 +185,38 @@ class Ingredient{
         }
         return $Ingredients;
     }
-    //$bdd
+
     //----------------------------------------------- Supprimer -----------------------------------------------
-    public function deleteIngredientById() {
-        try {
-            $bdd = bddconnexion::getInstance()->getBdd();
-            $stmt = $bdd->prepare("DELETE FROM Ingredient WHERE Id_Ingredient = :Id");
-            $stmt->bindParam(':Id', $this->Id_Ingredient, PDO::PARAM_INT);
+    public static function deleteIngredient($Id_Ingredient) {
+        $bdd = bddconnexion::getInstance()->getBdd();
     
-            if ($stmt->execute()) {
-                return true;
-            } else {
-                return false;
+        // Débuter une transaction
+        $bdd->beginTransaction();
+    
+        try {
+            // Supprimer les entrées associées dans les tables associatives
+            $tables = ['Contient', 'Provient', 'Livre', 'Produit'];
+            foreach ($tables as $table) {
+                $stmt = $bdd->prepare("DELETE FROM $table WHERE Id_Ingredient = :Id_Ingredient");
+                $stmt->bindParam(':Id_Ingredient', $Id_Ingredient, PDO::PARAM_INT);
+                $stmt->execute();
             }
-        } catch (PDOException $e) {
-            // Vous pouvez écrire l'erreur dans un fichier journal ou afficher un message d'erreur.
-            error_log("Erreur lors de la suppression de la Ingredient : " . $e->getMessage());
-            return false;
+    
+            // Supprimer l'ingrédient de la table Ingredient
+            $stmt = $bdd->prepare("DELETE FROM Ingredient WHERE Id_Ingredient = :Id_Ingredient");
+            $stmt->bindParam(':Id_Ingredient', $Id_Ingredient, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            // Valider la transaction
+            $bdd->commit();
+            return ['success' => true];
+        } catch (Exception $e) {
+            $bdd->rollBack();
+            return ['success' => false, 'message' => 'Erreur lors de la suppression: ' . $e->getMessage()];
         }
     }
+    
+    
 
     /**
      * Get the value of Id_Ingredient

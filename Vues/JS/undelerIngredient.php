@@ -2,17 +2,11 @@
 include '../../Modeles/bdd_connexion.php';
 include '../../Modeles/Ingredient.php';
 
-$Id = $_GET['Id_Ingredient'];
-$Ingredient = Ingredient::getInfoIngredient($Id);
+$Id_Ingredient = $_GET['Id_Ingredient'];
 
-if ($Ingredient !== false) {
-    if ($Ingredient->deleteIngredientById()) {
-        echo "Ingrédient effacé\n";
-        $response = array('success' => true);
-    } else {
-        $response = array('success' => false, 'message' => 'Ingrédient non effacé!');
-    }
-} else {
-    $response = array('success' => false, 'message' => 'Ingrédient non trouvé!');
-}
+header('Content-Type: application/json');
+
+$result = Ingredient::deleteIngredient($Id_Ingredient); // Appel de la méthode statique
+
+echo json_encode($result); // Retourner le résultat en JSON
 ?>
