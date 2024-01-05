@@ -4,7 +4,7 @@ include '../../Modeles/Ingredient.php';
 
 $Id_Ingredient = $_GET['Id_Ingredient'];
 
-header('Content-Type: application/json');
+header ('Content-Type: application/json');
 
 $result = Ingredient::deleteIngredient($Id_Ingredient); // Appel de la méthode statique
 
